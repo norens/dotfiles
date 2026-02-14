@@ -1,19 +1,20 @@
 alias cfg='git --git-dir=$HOME/macos-configs --work-tree=$HOME'
+alias cz='chezmoi'
 alias v='nvim'
 alias e='eza'
+alias ls='eza'
+alias lsa='eza -la'
+alias lst='eza --tree --level=2'
+alias lg='lazygit'
 alias git-largest-files="git rev-list --objects --all |
   git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' |
   sed -n 's/^blob //p' |
   sort --numeric-sort --key=2 |
   cut -c 1-12,41- |
   $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest"
-alias gimp='/Applications/GIMP.app/Contents/MacOS/gimp'
-alias g='gcc-12 -O2 -std=c++17 -lstdc++'
 alias gitpullall='ls | xargs -P10 -I{} git -C {} pull'
 alias p='pnpm'
 alias dup='docker compose up'
 alias n='nnn -A'
 alias j='just -g'
-alias c='cursor'
-#alias python='python3'
 alias prmerge='$HOME/scripts/merge_pr.sh'

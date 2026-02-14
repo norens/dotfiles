@@ -1,110 +1,77 @@
-export PATH="$HOME/code/homebrew/bin:$PATH"
-#export EDITOR="nvim"
-
 set -o vi
 
 export GOKU_EDN_CONFIG_FILE=~/.config/goku/karabiner.edn
 
 . ~/.zsh_aliases
 
-# add brew bash autocompletion
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
+# Homebrew
+eval "$(/usr/local/bin/brew shellenv)"
+
+# Completions
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fpath=($HOME/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
 
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' select-prompt ''
-
-# For Python & Tkinter
-
-export PATH="$HOME/.poetry/bin:$PATH"
-
-export PATH="$HOME/perl5/bin${PATH:+:${PATH}}";
-export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
-export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
-export PERL_MB_OPT="--install_base \"$HOME/perl5\"";
-export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5";
-
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-#source $HOME/.cargo/env
+# Plugins
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias clear="printf '\33c\e[3J'"
-export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export GEM_HOME=$HOME/.gem
-export PATH="$PATH:$HOME/.gem/bin"
-
-export OPENSSL_ROOT_DIR=/usr/local/Cellar/openssl@1.1/1.1.1q/
-export OPENSSL_LIBRARIES=/usr/local/Cellar/openssl@1.1/1.1.1q/lib
-
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
+export PATH="./bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/nazarfedisin/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
-eval "$(/usr/local/bin/brew shellenv)"
-eval "$(zoxide init zsh)"
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
 
-export PATH="$HOME/go/bin:$PATH"
-
-eval $(thefuck --alias f)
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then	
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
-
+# Version managers
 eval "$(fnm env --use-on-cd --shell zsh)"
-eval $(thefuck --alias)
+eval "$(pyenv init -)"
 eval "$(rbenv init - zsh)"
 
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
-export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
+# Tools
+eval "$(zoxide init zsh)"
+eval $(thefuck --alias f)
+eval "$(starship init zsh)"
 
+# fzf
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -200'"
 
-eval "$(pyenv init -)"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/nazarfedisin/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
-# Add project bin to PATH for Rails projects
-export PATH="./bin:$PATH"
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+
+# Globals
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+alias clear="printf '\33c\e[3J'"
+
+export GEM_HOME=$HOME/.gem
+export PATH="$PATH:$HOME/.gem/bin"

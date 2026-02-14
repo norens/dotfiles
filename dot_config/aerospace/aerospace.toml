@@ -1,0 +1,126 @@
+# AeroSpace config — migrated from yabai + skhd
+# super = ctrl-alt-cmd (matches old skhd bindings)
+
+after-login-command = []
+after-startup-command = [
+  'exec-and-forget sketchybar'
+]
+
+# Notify SketchyBar of workspace changes
+exec-on-workspace-change = [
+  '/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
+# Normalizations
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Layout
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Gaps (top=24 for SketchyBar)
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 24
+outer.right = 0
+
+# ---------------------------------------------------------------
+# Main mode — super (ctrl-alt-cmd) keybindings
+# ---------------------------------------------------------------
+[mode.main.binding]
+
+# Focus windows (hjkl)
+ctrl-alt-cmd-h = 'focus left'
+ctrl-alt-cmd-j = 'focus down'
+ctrl-alt-cmd-k = 'focus up'
+ctrl-alt-cmd-l = 'focus right'
+
+# Move windows (shift + hjkl)
+ctrl-alt-cmd-shift-h = 'move left'
+ctrl-alt-cmd-shift-j = 'move down'
+ctrl-alt-cmd-shift-k = 'move up'
+ctrl-alt-cmd-shift-l = 'move right'
+
+# Fullscreen
+ctrl-alt-cmd-f = 'fullscreen'
+
+# Close window
+ctrl-alt-cmd-q = 'close'
+
+# Focus monitors ([ and ])
+ctrl-alt-cmd-leftSquareBracket = 'focus-monitor prev'
+ctrl-alt-cmd-rightSquareBracket = 'focus-monitor next'
+
+# Move window to monitor
+ctrl-alt-cmd-shift-leftSquareBracket = 'move-node-to-monitor prev'
+ctrl-alt-cmd-shift-rightSquareBracket = 'move-node-to-monitor next'
+
+# App launchers
+ctrl-alt-cmd-w = 'exec-and-forget open -a Ghostty'
+ctrl-alt-cmd-shift-w = 'exec-and-forget open -na Ghostty'
+ctrl-alt-cmd-b = 'exec-and-forget open -a Arc'
+
+# Workspaces 1-9
+ctrl-alt-cmd-1 = 'workspace 1'
+ctrl-alt-cmd-2 = 'workspace 2'
+ctrl-alt-cmd-3 = 'workspace 3'
+ctrl-alt-cmd-4 = 'workspace 4'
+ctrl-alt-cmd-5 = 'workspace 5'
+ctrl-alt-cmd-6 = 'workspace 6'
+ctrl-alt-cmd-7 = 'workspace 7'
+ctrl-alt-cmd-8 = 'workspace 8'
+ctrl-alt-cmd-9 = 'workspace 9'
+
+# Move window to workspace
+ctrl-alt-cmd-shift-1 = 'move-node-to-workspace 1'
+ctrl-alt-cmd-shift-2 = 'move-node-to-workspace 2'
+ctrl-alt-cmd-shift-3 = 'move-node-to-workspace 3'
+ctrl-alt-cmd-shift-4 = 'move-node-to-workspace 4'
+ctrl-alt-cmd-shift-5 = 'move-node-to-workspace 5'
+ctrl-alt-cmd-shift-6 = 'move-node-to-workspace 6'
+ctrl-alt-cmd-shift-7 = 'move-node-to-workspace 7'
+ctrl-alt-cmd-shift-8 = 'move-node-to-workspace 8'
+ctrl-alt-cmd-shift-9 = 'move-node-to-workspace 9'
+
+# Enter service mode
+ctrl-alt-cmd-semicolon = 'mode service'
+
+# ---------------------------------------------------------------
+# Service mode — for resize, layout, and less common actions
+# ---------------------------------------------------------------
+[mode.service.binding]
+esc = 'mode main'
+
+# Resize
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+# Layout
+slash = 'layout tiles horizontal vertical'
+comma = 'layout accordion horizontal vertical'
+
+# Float / fullscreen / balance
+f = 'layout floating tiling'
+w = 'fullscreen'
+b = 'balance-sizes'
+
+# Back to main
+enter = 'mode main'
+
+# ---------------------------------------------------------------
+# Window rules
+# ---------------------------------------------------------------
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.tdesktop.Telegram'
+run = 'move-node-to-workspace 4'

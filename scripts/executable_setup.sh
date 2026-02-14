@@ -4,15 +4,12 @@ set -euo pipefail
 # Bootstrap script for a new Mac
 # Idempotent — safe to re-run at any time
 
-DOTFILES_REPO="https://github.com/norens/macos-configs.git"
-DOTFILES_DIR="$HOME/macos-configs"
+CHEZMOI_REPO="norens/dotfiles"
 
 info()  { printf "\033[1;34m[INFO]\033[0m  %s\n" "$1"; }
 ok()    { printf "\033[1;32m[OK]\033[0m    %s\n" "$1"; }
 warn()  { printf "\033[1;33m[WARN]\033[0m  %s\n" "$1"; }
 err()   { printf "\033[1;31m[ERR]\033[0m   %s\n" "$1"; }
-
-cfg() { git --git-dir="$DOTFILES_DIR" --work-tree="$HOME" "$@"; }
 
 # -------------------------------------------------------------------
 # 1. Homebrew
@@ -26,29 +23,18 @@ else
 fi
 
 # -------------------------------------------------------------------
-# 2. Clone dotfiles (bare repo)
+# 2. chezmoi + dotfiles
 # -------------------------------------------------------------------
-if [ -d "$DOTFILES_DIR" ]; then
-  ok "Dotfiles repo already exists at $DOTFILES_DIR"
+if command -v chezmoi &>/dev/null && [ -d "$HOME/.local/share/chezmoi" ]; then
+  ok "chezmoi already initialized"
+  info "Applying latest dotfiles..."
+  chezmoi apply
 else
-  info "Cloning dotfiles bare repo..."
-  git clone --bare "$DOTFILES_REPO" "$DOTFILES_DIR"
-  cfg config core.bare false
-  cfg config core.worktree "$HOME"
-  cfg config status.showUntrackedFiles no
-
-  # Checkout files — back up any conflicts
-  if ! cfg checkout 2>/dev/null; then
-    warn "Backing up conflicting files..."
-    mkdir -p "$HOME/.dotfiles-backup"
-    cfg checkout 2>&1 | grep -E "^\s+" | awk '{print $1}' | while read -r f; do
-      mkdir -p "$HOME/.dotfiles-backup/$(dirname "$f")"
-      mv "$HOME/$f" "$HOME/.dotfiles-backup/$f"
-    done
-    cfg checkout
-  fi
-  ok "Dotfiles checked out"
+  info "Installing chezmoi and applying dotfiles..."
+  brew install chezmoi
+  chezmoi init --apply "$CHEZMOI_REPO"
 fi
+ok "Dotfiles applied"
 
 # -------------------------------------------------------------------
 # 3. Brewfile
@@ -94,12 +80,43 @@ fi
 # 6. Services
 # -------------------------------------------------------------------
 info "Starting services..."
-brew services start skhd 2>/dev/null || true
-brew services start yabai 2>/dev/null || true
-ok "Services started"
+brew services start felixkratz/formulae/sketchybar 2>/dev/null || true
+ok "Services started (AeroSpace starts via Login Items)"
 
 # -------------------------------------------------------------------
-# 7. macOS defaults
+# 7. tmux plugins
+# -------------------------------------------------------------------
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [ -d "$TPM_DIR" ]; then
+  ok "TPM already installed"
+else
+  info "Installing tmux plugin manager..."
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  ok "TPM installed — run prefix+I in tmux to install plugins"
+fi
+
+# -------------------------------------------------------------------
+# 8. Karabiner (Goku)
+# -------------------------------------------------------------------
+if command -v goku &>/dev/null; then
+  info "Regenerating Karabiner config via Goku..."
+  goku
+  ok "Karabiner config generated"
+fi
+
+# -------------------------------------------------------------------
+# 9. SketchyBar helpers
+# -------------------------------------------------------------------
+SKETCHYBAR_HELPERS="$HOME/.config/sketchybar/helpers"
+if [ -d "$SKETCHYBAR_HELPERS" ] && [ -f "$SKETCHYBAR_HELPERS/install.sh" ]; then
+  info "Building SketchyBar helpers..."
+  cd "$SKETCHYBAR_HELPERS" && bash install.sh
+  cd "$HOME"
+  ok "SketchyBar helpers built"
+fi
+
+# -------------------------------------------------------------------
+# 10. macOS defaults
 # -------------------------------------------------------------------
 info "Applying macOS defaults..."
 
@@ -130,7 +147,7 @@ killall Finder 2>/dev/null || true
 ok "macOS defaults applied"
 
 # -------------------------------------------------------------------
-# 8. Version managers
+# 11. Version managers
 # -------------------------------------------------------------------
 if command -v fnm &>/dev/null; then
   info "Installing latest LTS Node.js via fnm..."

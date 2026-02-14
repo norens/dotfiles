@@ -3,6 +3,8 @@
 	:devices {
 		:macbook-keyboard [{:vendor_id 0 :product_id 0}]
 		:moonlander [{:vendor_id 12951 :product_id 6505}]
+		;; TODO: get actual vendor/product IDs from Karabiner-EventViewer
+		:keychron-k3-e3 [{:vendor_id 13364 :product_id 592}]
 	}
 	:main, [
 		{:des "Configure modifier keys on macbook keyboard" :rules [
@@ -57,51 +59,6 @@
 			[:!F##s :left_arrow :macbook-keyboard]
 			[:!F##d :down_arrow :macbook-keyboard]
 			[:!F##f :right_arrow :macbook-keyboard]
-		]}
-
-		{:des "Remap layout to Programmer Dvorak on MacBook Keyboard" :rules [
-			;; numbers row
-			[:##hyphen :open_bracket :macbook-keyboard]
-			[:##equal_sign :close_bracket :macbook-keyboard]
-
-			;; top row
-			[:##q :quote :macbook-keyboard]
-			[:##w :comma :macbook-keyboard]
-			[:##e :period :macbook-keyboard]
-			[:##r :p :macbook-keyboard]
-			[:##t :y :macbook-keyboard]
-			[:##y :f :macbook-keyboard]
-			[:##u :g :macbook-keyboard]
-			[:##i :c :macbook-keyboard]
-			[:##o :r :macbook-keyboard]
-			[:##p :l :macbook-keyboard]
-			[:##open_bracket :slash :macbook-keyboard]
-			[:##close_bracket :equal_sign :macbook-keyboard]
-
-			;; home row
-			[:##a :a :macbook-keyboard]
-			[:##s :o :macbook-keyboard]
-			[:##d :e :macbook-keyboard]
-			[:##f :u :macbook-keyboard]
-			[:##g :i :macbook-keyboard]
-			[:##h :d :macbook-keyboard]
-			[:##j :h :macbook-keyboard]
-			[:##k :t :macbook-keyboard]
-			[:##l :n :macbook-keyboard]
-			[:##semicolon :s :macbook-keyboard]
-			[:##quote :hyphen :macbook-keyboard]
-
-			;; bottom row
-			[:##z :semicolon :macbook-keyboard]
-			[:##x :q :macbook-keyboard]
-			[:##v :k :macbook-keyboard]
-			[:##c :j :macbook-keyboard]
-			[:##b :x :macbook-keyboard]
-			[:##n :b :macbook-keyboard]
-			[:##m :m :macbook-keyboard]
-			[:##comma :w :macbook-keyboard]
-			[:##period :v :macbook-keyboard]
-			[:##slash :z :macbook-keyboard]
 		]}
 
 		;; To prevent Shift from affecting numbers, our Moonlander's numbers are
