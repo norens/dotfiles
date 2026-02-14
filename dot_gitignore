@@ -1,0 +1,119 @@
+# Ignore everything by default
+*
+
+# Repo meta
+!.gitignore
+!.gitmodules
+!CLAUDE.md
+!README.md
+
+# Scripts
+!scripts
+!scripts/*
+
+# Shell
+!.zshrc
+!.zsh_aliases
+
+# Git config
+!.gitconfig
+
+# Config files (allowlist pattern: block .config/*, then un-ignore specific items)
+!.config
+.config/*
+
+# Yabai + YMSP
+!.config/yabai
+!.config/yabai/*
+!.config/ymsp
+!.config/ymsp/ymsp.config.json
+
+# Karabiner + Goku + skhd
+!.config/karabiner
+!.config/karabiner/karabiner.json
+!.config/goku
+!.config/goku/*
+!.config/skhd
+!.config/skhd/*
+
+# Brew
+!.config/brewfile
+!.config/brewfile/*
+
+# GitHub CLI (config only, NOT hosts.yml which contains auth)
+!.config/gh
+.config/gh/*
+!.config/gh/config.yml
+
+# thefuck
+!.config/thefuck
+.config/thefuck/*
+!.config/thefuck/settings.py
+
+# Global git ignore
+!.config/git
+.config/git/*
+!.config/git/ignore
+
+# JetBrains keymaps (canonical copy)
+!.config/jetbrains-keymaps
+!.config/jetbrains-keymaps/*
+
+# SSH (config only, NOT keys)
+!.ssh
+.ssh/*
+!.ssh/config
+
+# Cursor IDE
+!Library
+Library/*
+!Library/Application Support
+Library/Application Support/*
+!Library/Application Support/Cursor
+Library/Application Support/Cursor/*
+!Library/Application Support/Cursor/User
+Library/Application Support/Cursor/User/*
+!Library/Application Support/Cursor/User/keybindings.json
+!Library/Application Support/Cursor/User/settings.json
+
+# macOS input sources
+!Library/Preferences
+Library/Preferences/*
+!Library/Preferences/com.apple.HIToolbox.plist
+
+# Always ignore
+.DS_Store
+
+# ===========================================================================
+# DORMANT - configs that don't exist yet; un-comment when installed
+# ===========================================================================
+# !readme.md  (using README.md instead)
+# !.vimrc
+# !.config/nvim
+# !.config/nvim/*
+# !.config/just
+# !.config/just/*
+# !.config/refined-github
+# !.config/refined-github/*
+# !.qutebrowser
+# !.qutebrowser/autoconfig.yml
+# !.qutebrowser/config.py
+# !Library/Application Support/Code
+# !Library/Application Support/Code/User
+# !Library/Application Support/Code/User/keybindings.json
+# !Library/Application Support/Code/User/settings.json
+# !Library/Preferences/qutebrowser
+# !Library/Preferences/qutebrowser/autoconfig.yml
+# !Library/Application Support/qutebrowser
+# !Library/Application Support/qutebrowser/userscripts
+# !Library/Application Support/qutebrowser/userscripts/qute-1pass
+# !Library/Application Support/espanso
+# Library/Application Support/espanso/*
+# !Library/Application Support/espanso/match
+# !Library/Application Support/espanso/match/*
+# !Library/LaunchAgents
+# !Library/LaunchAgents/com.federicoterzi.espanso.plist
+# !Library/KeyBindings
+# !Library/KeyBindings/*
+# !Library/Keyboard Layouts
+# !Library/Keyboard Layouts/NoOptionCodes.keylayout

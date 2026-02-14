@@ -1,0 +1,606 @@
+<keymap version="1" name="macOS_mod" parent="Mac OS X 10.5+">
+  <action id="$Cut">
+    <keyboard-shortcut first-keystroke="meta x" />
+  </action>
+  <action id="ActivateCommitToolWindow">
+    <keyboard-shortcut first-keystroke="meta k" />
+  </action>
+  <action id="ActivateDatabaseToolWindow">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta b" />
+    <keyboard-shortcut first-keystroke="shift alt d" />
+  </action>
+  <action id="ActivateFavoritesToolWindow" />
+  <action id="ActivateFindToolWindow">
+    <keyboard-shortcut first-keystroke="alt 3" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="f" />
+  </action>
+  <action id="ActivateProjectToolWindow">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="1" />
+  </action>
+  <action id="ActivateTODOToolWindow">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="6" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta t" />
+    <keyboard-shortcut first-keystroke="meta 9" />
+  </action>
+  <action id="ActivateTerminalToolWindow">
+    <keyboard-shortcut first-keystroke="meta back_quote" />
+  </action>
+  <action id="ActivateVersionControlToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta 9" />
+  </action>
+  <action id="Activategithub.copilotToolWindowToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta back_slash" />
+  </action>
+  <action id="Annotate">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="a" />
+  </action>
+  <action id="Arrangement.Rule.Edit" />
+  <action id="Arrangement.Rule.Group.Condition.Move.Up" />
+  <action id="Arrangement.Rule.Match.Condition.Move.Down" />
+  <action id="Arrangement.Rule.Match.Condition.Move.Up" />
+  <action id="CIDR.Debugger.ShowInMemoryView" />
+  <action id="CIDR.Lang.ObjC.IntroduceIvar" />
+  <action id="CMake.ClearCacheAndReload">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta r" />
+  </action>
+  <action id="ChangeColorScheme">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta c" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta 2" />
+  </action>
+  <action id="ChangeKeymap">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta k" />
+  </action>
+  <action id="ChangeLaf">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta quote" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta open_bracket" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta m" />
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta 1" />
+  </action>
+  <action id="ChangeView">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta quote" />
+  </action>
+  <action id="ChangesView.Rename">
+    <keyboard-shortcut first-keystroke="shift f6" />
+  </action>
+  <action id="ChooseDebugConfiguration">
+    <keyboard-shortcut first-keystroke="ctrl alt d" />
+    <keyboard-shortcut first-keystroke="shift alt 2" />
+  </action>
+  <action id="ChooseRunConfiguration">
+    <keyboard-shortcut first-keystroke="ctrl alt r" />
+    <keyboard-shortcut first-keystroke="shift alt 1" />
+  </action>
+  <action id="Clean">
+    <keyboard-shortcut first-keystroke="shift meta f12" />
+  </action>
+  <action id="CloseActiveTab">
+    <keyboard-shortcut first-keystroke="meta w" />
+  </action>
+  <action id="CloseAllEditorsButActive">
+    <keyboard-shortcut first-keystroke="meta alt w" />
+  </action>
+  <action id="CloseProject">
+    <keyboard-shortcut first-keystroke="shift meta w" />
+  </action>
+  <action id="CodeCompletion">
+    <keyboard-shortcut first-keystroke="ctrl space" />
+    <keyboard-shortcut first-keystroke="meta space" />
+  </action>
+  <action id="CodeGlance.toggle" />
+  <action id="CollapseAll">
+    <keyboard-shortcut first-keystroke="meta subtract" />
+  </action>
+  <action id="CollapseAllRegions">
+    <keyboard-shortcut first-keystroke="meta alt minus" />
+  </action>
+  <action id="CollapseExpandableComponent">
+    <keyboard-shortcut first-keystroke="shift enter" />
+    <keyboard-shortcut first-keystroke="meta subtract" />
+  </action>
+  <action id="CollapseRegion">
+    <keyboard-shortcut first-keystroke="meta subtract" />
+    <mouse-shortcut keystroke="button2" />
+  </action>
+  <action id="CollapseRegionRecursively" />
+  <action id="Console.Jdbc.Execute.2">
+    <keyboard-shortcut first-keystroke="meta alt enter" />
+  </action>
+  <action id="Console.TableResult.MaximizeEditingCell" />
+  <action id="Console.TableResult.Reload">
+    <keyboard-shortcut first-keystroke="f5" />
+  </action>
+  <action id="DatabaseView.DataSourceCutAction">
+    <keyboard-shortcut first-keystroke="meta x" />
+  </action>
+  <action id="Debug">
+    <keyboard-shortcut first-keystroke="ctrl d" />
+    <keyboard-shortcut first-keystroke="meta 2" />
+  </action>
+  <action id="Debugger.AddToWatch">
+    <keyboard-shortcut first-keystroke="shift alt w" />
+  </action>
+  <action id="DirDiffMenu.SynchronizeDiff.All" />
+  <action id="DuplicatesForm.SendToRight" />
+  <action id="EditSource">
+    <keyboard-shortcut first-keystroke="f4" />
+  </action>
+  <action id="EditSourceInNewWindow">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta w" />
+  </action>
+  <action id="EditorCloneCaretAbove">
+    <keyboard-shortcut first-keystroke="shift alt up" />
+  </action>
+  <action id="EditorCloneCaretBelow">
+    <keyboard-shortcut first-keystroke="shift alt down" />
+  </action>
+  <action id="EditorCreateRectangularSelectionOnMouseDrag">
+    <mouse-shortcut keystroke="alt button1" />
+  </action>
+  <action id="EditorCut">
+    <keyboard-shortcut first-keystroke="meta x" />
+  </action>
+  <action id="EditorDeleteLine">
+    <keyboard-shortcut first-keystroke="shift delete" />
+  </action>
+  <action id="EditorDeleteToLineEnd">
+    <keyboard-shortcut first-keystroke="shift meta delete" />
+  </action>
+  <action id="EditorGutterToggleGlobalLineNumbers">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="l" />
+  </action>
+  <action id="EditorJoinLines">
+    <keyboard-shortcut first-keystroke="shift ctrl j" />
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="EditorPasteFromX11" />
+  <action id="EditorSelectWord">
+    <keyboard-shortcut first-keystroke="alt w" />
+    <keyboard-shortcut first-keystroke="meta up" />
+  </action>
+  <action id="EditorSplitLine" />
+  <action id="EditorTextEnd">
+    <keyboard-shortcut first-keystroke="meta end" />
+    <keyboard-shortcut first-keystroke="meta down" />
+  </action>
+  <action id="EditorToggleUseSoftWraps">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta w" />
+  </action>
+  <action id="EditorUnSelectWord" />
+  <action id="EditorUp">
+    <keyboard-shortcut first-keystroke="up" />
+  </action>
+  <action id="ExecuteInPyConsoleAction">
+    <keyboard-shortcut first-keystroke="shift alt e" />
+  </action>
+  <action id="ExpandAll">
+    <keyboard-shortcut first-keystroke="meta add" />
+  </action>
+  <action id="ExpandAllRegions">
+    <keyboard-shortcut first-keystroke="shift meta equals" />
+  </action>
+  <action id="ExpandAllToLevel">
+    <keyboard-shortcut first-keystroke="shift meta alt equals" />
+  </action>
+  <action id="ExpandAllToLevel1" />
+  <action id="ExpandAllToLevel2">
+    <keyboard-shortcut first-keystroke="meta alt equals" />
+  </action>
+  <action id="ExpandAllToLevel3" />
+  <action id="ExpandAllToLevel4" />
+  <action id="ExpandAllToLevel5" />
+  <action id="ExpandExpandableComponent">
+    <keyboard-shortcut first-keystroke="shift enter" />
+    <keyboard-shortcut first-keystroke="meta add" />
+  </action>
+  <action id="ExpandRegion">
+    <keyboard-shortcut first-keystroke="meta equals" />
+  </action>
+  <action id="ExpandRegionRecursively" />
+  <action id="ExpandToLevel1" />
+  <action id="ExpandToLevel2" />
+  <action id="ExpandToLevel3" />
+  <action id="ExpandToLevel4" />
+  <action id="ExpandToLevel5" />
+  <action id="ExternalSystem.CollapseAll">
+    <keyboard-shortcut first-keystroke="meta subtract" />
+  </action>
+  <action id="ExternalSystem.ExpandAll">
+    <keyboard-shortcut first-keystroke="meta add" />
+  </action>
+  <action id="FileChooser.GotoModule" />
+  <action id="FileChooser.GotoProject" />
+  <action id="FileChooser.NewFolder" />
+  <action id="FileStructurePopup">
+    <keyboard-shortcut first-keystroke="meta m" />
+    <keyboard-shortcut first-keystroke="shift meta alt m" />
+  </action>
+  <action id="FindNext">
+    <keyboard-shortcut first-keystroke="meta g" />
+    <keyboard-shortcut first-keystroke="alt down" />
+  </action>
+  <action id="FindPrevious">
+    <keyboard-shortcut first-keystroke="alt up" />
+  </action>
+  <action id="FindUsages">
+    <keyboard-shortcut first-keystroke="alt f7" />
+    <keyboard-shortcut first-keystroke="meta r" />
+  </action>
+  <action id="FindWordAtCaret">
+    <keyboard-shortcut first-keystroke="alt f3" />
+  </action>
+  <action id="Generate">
+    <keyboard-shortcut first-keystroke="ctrl enter" />
+    <keyboard-shortcut first-keystroke="alt equals" />
+  </action>
+  <action id="Generate.Missing.Members.TypeScript">
+    <keyboard-shortcut first-keystroke="ctrl i" />
+    <keyboard-shortcut first-keystroke="alt equals" />
+  </action>
+  <action id="Git.Branches">
+    <keyboard-shortcut first-keystroke="shift alt b" />
+    <keyboard-shortcut first-keystroke="alt g" />
+  </action>
+  <action id="Git.Reword.Commit">
+    <keyboard-shortcut first-keystroke="shift f6" />
+  </action>
+  <action id="GotoAction">
+    <keyboard-shortcut first-keystroke="shift meta p" />
+  </action>
+  <action id="GotoChangedFile" />
+  <action id="GotoClass" />
+  <action id="GotoCustomRegion" />
+  <action id="GotoDeclaration">
+    <keyboard-shortcut first-keystroke="meta b" />
+    <mouse-shortcut keystroke="meta button1" />
+  </action>
+  <action id="GotoFile">
+    <keyboard-shortcut first-keystroke="meta o" />
+  </action>
+  <action id="GotoImplementation">
+    <keyboard-shortcut first-keystroke="meta alt b" />
+  </action>
+  <action id="GotoNextElementUnderCaretUsage" />
+  <action id="GotoNextError">
+    <keyboard-shortcut first-keystroke="alt back_slash" />
+  </action>
+  <action id="GotoPrevElementUnderCaretUsage" />
+  <action id="GotoPreviousError">
+    <keyboard-shortcut first-keystroke="shift alt back_slash" />
+  </action>
+  <action id="GotoSymbol">
+    <keyboard-shortcut first-keystroke="shift meta o" />
+  </action>
+  <action id="GotoTest" />
+  <action id="GotoUrlAction" />
+  <action id="HighlightUsagesInFile">
+    <keyboard-shortcut first-keystroke="shift meta f7" />
+    <keyboard-shortcut first-keystroke="alt r" />
+  </action>
+  <action id="HippieBackwardCompletion" />
+  <action id="HippieCompletion">
+    <keyboard-shortcut first-keystroke="alt n" />
+  </action>
+  <action id="Images.Editor.ToggleGrid" />
+  <action id="Images.Editor.ZoomIn">
+    <keyboard-shortcut first-keystroke="meta add" />
+  </action>
+  <action id="Images.Editor.ZoomOut">
+    <keyboard-shortcut first-keystroke="meta subtract" />
+  </action>
+  <action id="InsertLiveTemplate">
+    <keyboard-shortcut first-keystroke="alt t" />
+  </action>
+  <action id="IntroduceField" />
+  <action id="JS.TypeScript.Compile">
+    <keyboard-shortcut first-keystroke="shift meta alt t" />
+  </action>
+  <action id="LocalHistory.ShowHistory">
+    <keyboard-shortcut first-keystroke="shift meta alt h" />
+  </action>
+  <action id="MaintenanceAction" />
+  <action id="ManageRecentProjects">
+    <keyboard-shortcut first-keystroke="shift meta alt o" />
+  </action>
+  <action id="MethodDown">
+    <keyboard-shortcut first-keystroke="ctrl down" />
+  </action>
+  <action id="MethodOverloadSwitchDown" />
+  <action id="MethodOverloadSwitchUp" />
+  <action id="MinimizeCurrentWindow" />
+  <action id="MoveEditorToOppositeTabGroup">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta open_bracket" />
+  </action>
+  <action id="MoveLineDown">
+    <keyboard-shortcut first-keystroke="shift meta alt down" />
+  </action>
+  <action id="MoveLineUp">
+    <keyboard-shortcut first-keystroke="shift meta alt up" />
+  </action>
+  <action id="MoveTabRight">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta close_bracket" />
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="alt close_bracket" />
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta close_bracket" />
+  </action>
+  <action id="NewDir">
+    <keyboard-shortcut first-keystroke="shift meta n" />
+  </action>
+  <action id="NewElement">
+    <keyboard-shortcut first-keystroke="ctrl enter" />
+  </action>
+  <action id="NewFile">
+    <keyboard-shortcut first-keystroke="meta n" />
+  </action>
+  <action id="NewScratchFile">
+    <keyboard-shortcut first-keystroke="shift meta alt n" />
+  </action>
+  <action id="NextSplitter">
+    <keyboard-shortcut first-keystroke="alt tab" />
+    <keyboard-shortcut first-keystroke="meta escape" />
+    <keyboard-shortcut first-keystroke="shift alt close_bracket" />
+  </action>
+  <action id="NextWindow" />
+  <action id="OptimizeImports">
+    <keyboard-shortcut first-keystroke="ctrl alt o" />
+    <keyboard-shortcut first-keystroke="meta alt o" />
+  </action>
+  <action id="PinActiveTab">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta p" />
+  </action>
+  <action id="PopupHector" />
+  <action id="PrevSplitter">
+    <keyboard-shortcut first-keystroke="shift alt tab" />
+    <keyboard-shortcut first-keystroke="shift alt open_bracket" />
+  </action>
+  <action id="ProjectRefreshAction" />
+  <action id="QuickImplementations">
+    <keyboard-shortcut first-keystroke="meta i" />
+    <mouse-shortcut keystroke="meta button3" />
+  </action>
+  <action id="QuickTypeDefinition">
+    <keyboard-shortcut first-keystroke="shift meta i" />
+  </action>
+  <action id="RebuildProject">
+    <keyboard-shortcut first-keystroke="meta f12" />
+  </action>
+  <action id="RecentLocations" />
+  <action id="Refresh" />
+  <action id="RemoteHost.NewRemoteItem">
+    <keyboard-shortcut first-keystroke="ctrl enter" />
+  </action>
+  <action id="RenameElement">
+    <keyboard-shortcut first-keystroke="f2" />
+  </action>
+  <action id="ReopenClosedTab">
+    <keyboard-shortcut first-keystroke="shift meta t" />
+  </action>
+  <action id="Replace">
+    <keyboard-shortcut first-keystroke="meta h" />
+    <keyboard-shortcut first-keystroke="meta alt h" />
+    <keyboard-shortcut first-keystroke="meta alt f" />
+  </action>
+  <action id="Rerun">
+    <keyboard-shortcut first-keystroke="shift alt r" />
+  </action>
+  <action id="RerunTests">
+    <keyboard-shortcut first-keystroke="ctrl meta r" />
+  </action>
+  <action id="Resume">
+    <keyboard-shortcut first-keystroke="f9" />
+  </action>
+  <action id="RevealIn">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta enter" />
+  </action>
+  <action id="Run">
+    <keyboard-shortcut first-keystroke="ctrl r" />
+    <keyboard-shortcut first-keystroke="meta 1" />
+  </action>
+  <action id="RunAnything">
+    <keyboard-shortcut first-keystroke="meta 3" />
+  </action>
+  <action id="RunClass">
+    <keyboard-shortcut first-keystroke="shift ctrl r" />
+    <keyboard-shortcut first-keystroke="shift meta 1" />
+    <keyboard-shortcut first-keystroke="shift meta exclamation_mark" />
+  </action>
+  <action id="RunConfigurationAsAction_Coverage_test-contract_1_default_target">
+    <keyboard-shortcut first-keystroke="meta alt numpad5" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build-conf_default_target">
+    <keyboard-shortcut first-keystroke="meta alt 7" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_conf.ts_default_target">
+    <keyboard-shortcut first-keystroke="meta alt 7" />
+    <keyboard-shortcut first-keystroke="meta alt numpad7" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract.wax.0_default_target">
+    <keyboard-shortcut first-keystroke="meta numpad1" />
+    <keyboard-shortcut first-keystroke="meta alt numpad1" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract.wax.2_default_target">
+    <keyboard-shortcut first-keystroke="meta numpad2" />
+    <keyboard-shortcut first-keystroke="meta alt numpad2" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:Debug">
+    <keyboard-shortcut first-keystroke="meta alt 1" />
+    <keyboard-shortcut first-keystroke="meta alt numpad0" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:dev">
+    <keyboard-shortcut first-keystroke="meta alt numpad3" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:dev.eos">
+    <keyboard-shortcut first-keystroke="meta alt numpad1" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:dev_eos">
+    <keyboard-shortcut first-keystroke="ctrl alt numpad1" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:wax.0.dev">
+    <keyboard-shortcut first-keystroke="shift meta numpad1" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_CMakeBuildProfile:wax.2.dev">
+    <keyboard-shortcut first-keystroke="shift meta numpad2" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_q_CMakeBuildProfile:Debug">
+    <keyboard-shortcut first-keystroke="meta alt numpad2" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_q_CMakeBuildProfile:dev.eos.1">
+    <keyboard-shortcut first-keystroke="meta alt numpad2" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_contract_q_CMakeBuildProfile:dev_eos">
+    <keyboard-shortcut first-keystroke="ctrl alt numpad2" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_build_messages.ts_default_target">
+    <keyboard-shortcut first-keystroke="meta alt 8" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_sync-l10n_default_target">
+    <keyboard-shortcut first-keystroke="meta alt 8" />
+  </action>
+  <action id="RunConfigurationAsAction_Run_test-contract_default_target">
+    <keyboard-shortcut first-keystroke="meta alt 2" />
+    <keyboard-shortcut first-keystroke="meta alt numpad4" />
+  </action>
+  <action id="SaveAsTemplate">
+    <keyboard-shortcut first-keystroke="shift alt t" />
+  </action>
+  <action id="SearchEverywhere.NavigateToNextGroup">
+    <keyboard-shortcut first-keystroke="page_down" />
+  </action>
+  <action id="SelectAllOccurrences">
+    <keyboard-shortcut first-keystroke="shift meta alt j" />
+  </action>
+  <action id="SelectInProjectView">
+    <keyboard-shortcut first-keystroke="shift meta e" />
+  </action>
+  <action id="SelectNextOccurrence">
+    <keyboard-shortcut first-keystroke="alt j" />
+  </action>
+  <action id="ServiceView.ShowServices" />
+  <action id="ShelvedChanges.Rename">
+    <keyboard-shortcut first-keystroke="shift f6" />
+  </action>
+  <action id="ShowProjectStructureSettings" />
+  <action id="ShowSearchHistory" />
+  <action id="ShowSettings" />
+  <action id="ShowUsages">
+    <keyboard-shortcut first-keystroke="meta alt f7" />
+    <keyboard-shortcut first-keystroke="meta alt r" />
+  </action>
+  <action id="StringManipulation.AlignToColumns">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="equals" />
+  </action>
+  <action id="SurroundWith">
+    <keyboard-shortcut first-keystroke="meta alt t" />
+    <keyboard-shortcut first-keystroke="alt s" />
+  </action>
+  <action id="TW.MoveToGroup">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="shift meta alt m" />
+  </action>
+  <action id="TW.ViewModeGroup">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta quote" />
+  </action>
+  <action id="TWViewModes">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta slash" />
+  </action>
+  <action id="TodoViewGroupByGroup">
+    <keyboard-shortcut first-keystroke="alt p" />
+    <keyboard-shortcut first-keystroke="ctrl alt p" />
+  </action>
+  <action id="ToggleBookmarkWithMnemonic" />
+  <action id="ToggleDistractionFreeMode">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="semicolon" />
+  </action>
+  <action id="UML.ShowChanges" />
+  <action id="Unscramble">
+    <keyboard-shortcut first-keystroke="shift meta alt e" />
+  </action>
+  <action id="UnselectPreviousOccurrence">
+    <keyboard-shortcut first-keystroke="shift alt j" />
+  </action>
+  <action id="Unwrap" />
+  <action id="UsageView.Remove">
+    <keyboard-shortcut first-keystroke="meta x" />
+  </action>
+  <action id="Valgrind.EditSettings">
+    <keyboard-shortcut first-keystroke="meta comma" second-keystroke="comma" />
+  </action>
+  <action id="Vcs.EditSource">
+    <keyboard-shortcut first-keystroke="f4" />
+  </action>
+  <action id="Vcs.Log.Refresh" />
+  <action id="Vcs.Show.Local.Changes">
+    <keyboard-shortcut first-keystroke="shift meta g" second-keystroke="shift meta g" />
+  </action>
+  <action id="Vcs.Show.Log">
+    <keyboard-shortcut first-keystroke="shift meta g" second-keystroke="shift meta l" />
+    <keyboard-shortcut first-keystroke="shift meta g" second-keystroke="shift meta h" />
+  </action>
+  <action id="Vcs.ShowTabbedFileHistory">
+    <keyboard-shortcut first-keystroke="shift meta alt g" />
+  </action>
+  <action id="VcsShowNextChangeMarker">
+    <keyboard-shortcut first-keystroke="meta alt period" />
+  </action>
+  <action id="VcsShowPrevChangeMarker">
+    <keyboard-shortcut first-keystroke="meta alt comma" />
+  </action>
+  <action id="ViewInplaceComments" />
+  <action id="ViewSource" />
+  <action id="ViewStatusBar">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta s" />
+  </action>
+  <action id="ViewToolBar">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta t" />
+  </action>
+  <action id="ViewToolButtons">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta quote" />
+  </action>
+  <action id="WelcomeScreen.Plugins">
+    <keyboard-shortcut first-keystroke="meta comma" second-keystroke="meta p" />
+    <keyboard-shortcut first-keystroke="shift meta alt p" />
+  </action>
+  <action id="WindowMode">
+    <keyboard-shortcut first-keystroke="meta quote" second-keystroke="meta w" />
+  </action>
+  <action id="XDebugger.Inline">
+    <keyboard-shortcut first-keystroke="meta semicolon" second-keystroke="meta d" />
+  </action>
+  <action id="XDebugger.Inspect">
+    <keyboard-shortcut first-keystroke="f1" />
+  </action>
+  <action id="XDebugger.JumpToSource">
+    <keyboard-shortcut first-keystroke="f4" />
+  </action>
+  <action id="XDebugger.SetValue" />
+  <action id="copilot.applyInlays">
+    <keyboard-shortcut first-keystroke="meta right" />
+    <keyboard-shortcut first-keystroke="right" />
+  </action>
+  <action id="copilot.cycleNextInlays">
+    <keyboard-shortcut first-keystroke="alt period" />
+  </action>
+  <action id="copilot.cyclePrevInlays">
+    <keyboard-shortcut first-keystroke="alt comma" />
+  </action>
+  <action id="copilot.enableCopilot">
+    <keyboard-shortcut first-keystroke="meta 0" />
+  </action>
+  <action id="copilot.openCopilot">
+    <keyboard-shortcut first-keystroke="meta alt 0" />
+  </action>
+  <action id="copilot.requestCompletions">
+    <keyboard-shortcut first-keystroke="meta alt space" />
+  </action>
+  <action id="editRunConfigurations">
+    <keyboard-shortcut first-keystroke="shift meta 3" />
+  </action>
+  <action id="opennInSplittedTab">
+    <mouse-shortcut keystroke="meta alt button1" />
+  </action>
+  <action id="osmedile.intellij.stringmanip.DuplicateAndIncrementAction">
+    <keyboard-shortcut first-keystroke="ctrl meta alt i" />
+  </action>
+  <action id="osmedile.intellij.stringmanip.SwitchCasePopup">
+    <keyboard-shortcut first-keystroke="shift meta alt slash" />
+  </action>
+  <action id="tasks.close" />
+  <action id="tasks.open.in.browser" />
+</keymap>
