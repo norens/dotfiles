@@ -1,4 +1,4 @@
-alias cfg='git --git-dir=$HOME/macos-configs --work-tree=$HOME'
+# alias cfg='git --git-dir=$HOME/macos-configs --work-tree=$HOME'  # retired — kept for 2 weeks
 alias cz='chezmoi'
 alias v='nvim'
 alias e='eza'
