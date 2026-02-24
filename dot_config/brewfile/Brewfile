@@ -56,7 +56,7 @@ brew "zsh-syntax-highlighting"
 brew "felixkratz/formulae/sketchybar"
 
 # === Cask Applications ===
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 cask "anydesk"
 cask "arduino-ide"
 cask "claude"
