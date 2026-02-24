@@ -42,7 +42,7 @@ ok "Dotfiles applied"
 BREWFILE="$HOME/.config/brewfile/Brewfile"
 if [ -f "$BREWFILE" ]; then
   info "Installing packages from Brewfile..."
-  brew bundle install --file="$BREWFILE" --no-lock
+  brew bundle install --file="$BREWFILE"
   ok "Brewfile installed"
 else
   warn "Brewfile not found at $BREWFILE — skipping"
