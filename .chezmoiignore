@@ -1,0 +1,9 @@
+# chezmoi ignore — files/paths that should NEVER be tracked even if accidentally
+# placed inside the chezmoi source. See: https://www.chezmoi.io/reference/special-files-and-directories/chezmoiignore/
+
+# Raycast token in plaintext — must never end up in git
+.config/raycast/config.json
+
+# Local-only state that varies per machine
+.DS_Store
+**/.DS_Store
