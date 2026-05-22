@@ -10,9 +10,9 @@ Phase 1 — Безпека + дані           █████████░  
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
 Phase 4 — Containers + Cloud       █████████░  90% (C1 ✅, C2 ✅, Cl1-3 ✅; C3 — kubeconfig тривіальний)
-Phase 5 — Desktop UX polish        ███████░░░  75% (W1/W3/W5/E0 ✅, Q1-Q3 installed; Q5/W2 manual config)
+Phase 5 — Desktop UX polish        █████████░  90% (W1-W3/W5/E0/Q1-Q3/Q5/W2 ✅; Q4 floating rules — без use case)
 Phase 6 — Nice-to-have CLI         ██████████ 100% (S7+S8+H1+DB1+L1-L3 ✅)
-Phase 7 — JetBrains/Claude polish  ███████░░░  75% (E3+E5 ✅; E2 manual, E6 deferred)
+Phase 7 — JetBrains/Claude polish  █████████░  90% (E2/E3/E5 ✅; E6 deferred)
 Phase 8 — Eventual                 ░░░░░░░░░░   0%
 ```
 
@@ -117,7 +117,7 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (L1-L3) mkcert, watchexec (вже було, додано у Brewfile), gron — 2026-05-22
 
 ## Phase 7 — JetBrains/Claude polish
-- [ ] **MANUAL** (E2) JetBrains Settings Sync через account: у кожній IDE (IntelliJ/PyCharm/WebStorm/GoLand/CLion) Settings → Settings Sync → Enable Settings Sync → sign in з JetBrains account. Без CC-частини.
+- [x] **DONE** (E2) JetBrains Settings Sync увімкнено — 2026-05-22
 - [x] **DONE** (E3) Toolbox CLI shims: location `/usr/local/bin` (GUI PATH visibility — `~/.local/bin` не в GUI PATH без `/etc/paths.d/` entry). Shims на місці: `idea`, `pycharm`, `webstorm`, `clion` — 2026-05-22
 - [x] **DONE** (E5 part) `~/.claude/settings.json` (plugin enablement, voice, effortLevel, statusline) і `~/.claude/statusline-command.sh` (Gruvbox progress bar) у chezmoi. Не track: `projects/`, `cache/`, `debug/`, `file-history/`, `history.jsonl`, `tasks/`, `telemetry/`, `shell-snapshots/` — runtime state. — 2026-05-22
 - [ ] (E6) Claude Desktop MCP config — **deferred**. `claude_desktop_config.json` зараз має тільки `preferences` (без `mcpServers`). Tracking ризикує: якщо колись додаси MCP server з API key, ключ потрапить у github push. Активувати через `.tmpl` + `onepasswordRead` коли з'явиться перший MCP server з secret env.
@@ -131,8 +131,8 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (Q2) LinearMouse 0.11.2 installed. **MANUAL config**: launch → System Settings → Accessibility → grant; configure per-device settings. Видалити `mos` cask коли LinearMouse повністю замінить (зараз обидва є — оверлап OK на transition). — 2026-05-22
 - [x] **DONE** (Q3) AltTab 11.0.0 installed. **MANUAL config**: launch → grant accessibility → налаштувати bindings (Cmd+Tab override опц.) — 2026-05-22
 - [ ] **MANUAL** (Q4) Aerospace floating window rules — залежить від apps які користувач хоче floating
-- [ ] **MANUAL** (Q5) workspace-to-monitor-force-assignment (BenQ primary) — залежить від поточного monitor layout
-- [ ] **MANUAL** (W2) Firefox Multi-Account Containers extension — install з addons.mozilla.org
+- [x] **DONE** (Q5) workspace-to-monitor-force-assignment у aerospace.toml: ws 1-5 → BenQ PD2730S (з fallback на main коли laptop-only); ws 6-9 → main (built-in коли BenQ привіт primary). Якщо BenQ-name відрізняється від `BenQ PD2730S` після під'єднання — підкоригувати regex після `aerospace list-monitors`. — 2026-05-22
+- [x] **DONE** (W2) Firefox Multi-Account Containers extension встановлено — 2026-05-22
 
 ## Phase 8
 *Eventual cleanups: P5 pyenv→uv, P6 rbenv removal, P7 mise.toml в активних проектах, D1 Obsidian sync (CachyOS-related), K7 gpg cleanup.*

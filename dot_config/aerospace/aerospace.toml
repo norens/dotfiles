@@ -35,6 +35,22 @@ outer.bottom = 0
 outer.top = 24
 outer.right = 0
 
+# Workspace → monitor force-assignment.
+# Each value is an array tried in order; first match wins.
+# When BenQ PD2730S is connected: workspaces 1-5 land there (primary work).
+# Workspaces 6-9 always on built-in (comms / monitoring / system).
+# When laptop-only: everything falls back to 'main' (built-in).
+[workspace-to-monitor-force-assignment]
+1 = ['BenQ PD2730S', 'main']
+2 = ['BenQ PD2730S', 'main']
+3 = ['BenQ PD2730S', 'main']
+4 = ['BenQ PD2730S', 'main']
+5 = ['BenQ PD2730S', 'main']
+6 = 'main'
+7 = 'main'
+8 = 'main'
+9 = 'main'
+
 # ---------------------------------------------------------------
 # Main mode — super (ctrl-alt-cmd) keybindings
 # ---------------------------------------------------------------
