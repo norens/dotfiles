@@ -49,8 +49,17 @@ eval "$(rbenv init - zsh)"
 # ssh(1) itself uses IdentityAgent from ~/.ssh/config and doesn't need this.
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
+# Editor / pager
+export EDITOR=nano
+export VISUAL=nano
+export PAGER=less
+export MANPAGER="sh -c 'col -bx | bat -l man -p --paging=always'"
+export BAT_THEME=gruvbox-dark
+
 # Tools
 eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 eval $(thefuck --alias f)
 eval "$(starship init zsh)"
 
