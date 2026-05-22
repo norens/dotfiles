@@ -6,7 +6,7 @@
 
 ```
 Phase 0 — Repo hygiene             ████████░░  80% (3 ручні дії залишилось)
-Phase 1 — Безпека + дані           █░░░░░░░░░  10% (підготовка)
+Phase 1 — Безпека + дані           ████████░░  80% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         ░░░░░░░░░░   0%
 Phase 3 — Project workflow         ░░░░░░░░░░   0%
 Phase 4 — Containers + Cloud       ░░░░░░░░░░   0%
@@ -32,36 +32,43 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [ ] Verification: `tmutil latestbackup` показує свіжий запис
 
 ### (B2) restic → Cloudflare R2
-- [ ] **MANUAL** Створити R2 bucket у Cloudflare dashboard
-- [ ] **MANUAL** Створити R2 API token (Object Read & Write)
-- [ ] **MANUAL** Зберегти credentials у 1Password (item: "Cloudflare R2 Backup")
-- [ ] **CC** Поставити restic: `brew install restic`
-- [ ] **CC** Підготувати config + exclude file у `~/.config/restic/`
-- [ ] **CC** Створити launchd plist `~/Library/LaunchAgents/com.user.restic-backup.plist`
-- [ ] **CC** `launchctl load` + перший manual run
-- [ ] Verification: `restic -r r2:... snapshots` показує snapshot
+- [x] **DONE** R2 bucket `nazar-restic-backup` створено — 2026-05-21
+- [x] **DONE** R2 Account API token (Object Read & Write, scoped to bucket) — 2026-05-21
+- [x] **DONE** Credentials у 1Password item "Cloudflare R2 Backup" (Personal vault) — 2026-05-21
+- [x] **DONE** `brew install restic` 0.18.1 + Brewfile — 2026-05-21
+- [x] **DONE** `~/.config/restic/{env.sh,excludes.txt,backup.sh}` — 2026-05-21
+- [x] **DONE** `~/Library/LaunchAgents/com.user.restic-backup.plist`, scheduled 03:00 daily — 2026-05-21
+- [x] **DONE** Repo init (`b3ebfb0820`) + перший snapshot (`5de4489e`) — 2026-05-21
+- [x] **DONE** launchd kickstart verified — incremental backup працює (snapshot `a282145c`) — 2026-05-21
+- **Targets**: тільки `~/.local/share/chezmoi` (див. DECISIONS 2026-05-21). ~405 KiB raw, ~264 KiB stored.
+- **Out of scope зараз**: `~/Documents` (в iCloud Drive), `~/projects` (старе, у git).
 
 ### (K1) 1Password
-- [ ] **MANUAL** Підписатись на 1Password (~$3/міс)
-- [ ] **CC** `brew install --cask 1password 1password-cli`
-- [ ] **MANUAL** Logged in у Desktop app
-- [ ] **MANUAL** Експортувати з Apple Passwords (Settings → Passwords → "..." → Export)
-- [ ] **MANUAL** Імпортувати CSV в 1Password
-- [ ] **MANUAL** Safari extension: 1Password autofill замість Apple Passwords
-- [ ] Verification: `op vault list` показує items
+- [x] **DONE** Підписатись на 1Password (~$3/міс) — 2026-05-20
+- [x] **DONE** `brew install --cask 1password 1password-cli` — 2026-05-20 (1password 8.12.12, cli 2.34.0); додано у Brewfile
+- [x] **DONE** Logged in у Desktop app — 2026-05-21
+- [x] **DONE** CLI integration увімкнено (`op vault list` працює без `op signin`) — 2026-05-21
+- [x] **DONE** Експортовано з Apple Passwords — 2026-05-21
+- [x] **DONE** Імпортовано CSV в 1Password (з OTPAuth column → "One-time password") — 2026-05-21
+- [x] **DONE** CSV безпечно видалено через `rm -P ~/Downloads/Passwords.csv` — 2026-05-21
+- [ ] **MANUAL** Safari extension: enable 1Password в Safari → Preferences → Extensions; зняти Apple Passwords autofill (System Settings → Passwords → AutoFill). Passkeys лишити в Apple.
+- [x] **DONE** Verification: `op vault list` → `Personal` (fddrl7nlma7ldfiwq37hrgevje) — 2026-05-21
 
-### (K2) SSH config hardening + 1Password agent
-- [ ] **MANUAL** 1Password Settings → Developer → "Use the SSH agent" ON
-- [ ] **MANUAL** Імпортувати наявні SSH ключі (`~/.ssh/id_*`) у 1Password як SSH Key items
-- [ ] **CC** Додати `~/.ssh/config` у chezmoi (`private_dot_ssh/config`)
-- [ ] **CC** Додати global `Host *` block з hardening
-- [ ] Verification: `ssh -T git@github.com` без passphrase prompt
+### (K2) SSH config hardening + 1Password agent ✅
+- [x] **DONE** Fix permissions: id_ed25519-pwless, id_rsa_docker, ssh-p.ppk (були 0777 → 600/644) — 2026-05-22
+- [x] **DONE** Archive ssh-p.ppk + config.save + known_hosts.old у `~/.ssh/archive/` — 2026-05-22
+- [x] **DONE** 1Password Settings → Developer → "Use the SSH agent" ON — 2026-05-22
+- [x] **DONE** Imported `id_rsa` + `id_rsa_docker` у 1Password (id_ed25519-pwless skip — невідомо чи активний) — 2026-05-22
+- [x] **DONE** `~/.ssh/config` у chezmoi (`private_dot_ssh/config`) — 2026-05-22
+- [x] **DONE** Hardening: IdentityAgent → 1P socket, IdentitiesOnly, modern ciphers/KEX/MACs, ControlMaster, ServerAliveInterval, HashKnownHosts, StrictHostKeyChecking accept-new — 2026-05-22
+- [x] **DONE** `UseKeychain` видалено (Apple-only, не сумісно з Homebrew openssh; з 1P agent не потрібно) — 2026-05-22
+- [x] **DONE** Verification: `ssh -T git@github.com` → `Hi norens! You've successfully authenticated` через 1P agent — 2026-05-22
 
-### (K3) Fix broken SSH config
+### (K3) Fix broken SSH config ✅
 - [x] **DONE** Виправлено nested `Host` (staging-es.l-club.biz + 95.216.202.206) — 2026-05-20
 - [x] **DONE** Видалено exact duplicate `Host shop.med.lviv.ua` — 2026-05-20
-- [ ] **MANUAL** Розпакувати duplicate `Host 71.9.27.70` (різні ports 2222 vs 2212). Треба перейменувати на aliases (напр. `pool-71` + `deploy-71`) + `HostName 71.9.27.70`. SSH зараз бере першу сумісність → друга unreachable.
-- [ ] **CC (потім)** Перевірити що `staging-es.l-club.biz` справді мав бути окремий від `95.216.202.206`, чи задумувалось як `HostName 95.216.202.206`. Backup: `~/.ssh/config.backup-2026-05-20`.
+- [x] **DONE** Duplicate `Host 71.9.27.70` розпаковано: `pool-71` (port 2222, user pool) + `deploy-71` (port 2212, user deploy) — 2026-05-22
+- [x] **DONE** `staging-es.l-club.biz` об'єднано назад у один блок з `HostName 95.216.202.206` (DNS-перевірка показала що staging-es.l-club.biz не резолвиться, отже мав бути alias). User deploy + ForwardAgent. — 2026-05-22
 
 ### (Sec) raycast token guard
 - [x] **DONE** Додано `.config/raycast` у `.chezmoiignore` (2026-05-20)
@@ -94,3 +101,6 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 ## Журнал сесій
 
 - **2026-05-20** — Brainstorm-сесія: 7 шарів пройдено, 8 phases прийнято. Phase 0 розпочато.
+- **2026-05-21** — K1 (1Password міграція з Apple Passwords) + B2 (restic→R2 daily backup) реалізовано. Targets B2 скорочені до chezmoi-only (DECISIONS 2026-05-21). Залишається: Safari extension (K1, тривіально), B1 (купити SSD), K2-K5 (SSH + git signing).
+- **2026-05-22** — K2 + K3 виконано. SSH хід через 1Password agent (Touch ID), modern crypto (chacha20-poly1305 first), ControlMaster, hashed known_hosts. Duplicate `Host 71.9.27.70` → `pool-71`/`deploy-71`. `staging-es.l-club.biz` → alias для 95.216.202.206. ~/.ssh/config тепер у chezmoi (`private_dot_ssh/config`). `UseKeychain` видалено — несумісне з Homebrew openssh і непотрібне з 1P agent.
+- **2026-05-22** — Розпочато CachyOS bootstrap проект (`docs/cachyos-setup/`). Phase 4 D6 (tailscale) front-run-ить як частина mesh-доступу MacBook → CachyOS. Cask `tailscale-app` install чекає TTY-sudo (user manual action).
