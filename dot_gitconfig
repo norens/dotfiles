@@ -1,5 +1,14 @@
 [user]
 	name = nazarf
 	email = nazarfedishin@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIxncNY/HLahabk+GvkpZnhLWXpYq4+0UZhb22VWJqw
 [core]
 	autocrlf = input
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers

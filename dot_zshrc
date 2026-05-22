@@ -45,6 +45,10 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(pyenv init -)"
 eval "$(rbenv init - zsh)"
 
+# 1Password SSH agent — used by tools that read SSH_AUTH_SOCK (git signing, etc.)
+# ssh(1) itself uses IdentityAgent from ~/.ssh/config and doesn't need this.
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
 # Tools
 eval "$(zoxide init zsh)"
 eval $(thefuck --alias f)
