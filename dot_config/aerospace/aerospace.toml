@@ -72,7 +72,7 @@ ctrl-alt-cmd-shift-rightSquareBracket = 'move-node-to-monitor next'
 # App launchers
 ctrl-alt-cmd-w = 'exec-and-forget open -a Ghostty'
 ctrl-alt-cmd-shift-w = 'exec-and-forget open -na Ghostty'
-ctrl-alt-cmd-b = 'exec-and-forget open -a Arc'
+ctrl-alt-cmd-b = 'exec-and-forget open -a "Firefox Developer Edition"'
 
 # Workspaces 1-9
 ctrl-alt-cmd-1 = 'workspace 1'
