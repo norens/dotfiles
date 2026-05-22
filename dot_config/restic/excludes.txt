@@ -1,0 +1,66 @@
+# Generic noise
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Node
+node_modules
+.next
+.nuxt
+.turbo
+.parcel-cache
+dist
+build
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.tox
+.eggs
+*.egg-info
+
+# Rust / Go
+target
+vendor
+
+# JVM
+.gradle
+.idea
+*.iml
+
+# Mobile / iOS
+DerivedData
+xcuserdata
+
+# Editor / OS caches
+.cache
+.vscode-cleanup
+
+# Docker / containers
+.docker
+docker-volumes
+
+# Large archives / one-offs (already backed up elsewhere or rebuildable)
+*.tar.gz
+*.tar.zst
+*.zip
+*.iso
+*.dmg
+
+# Logs
+*.log
+logs
+
+# Misc
+.terraform
+.terragrunt-cache
+.serverless
+.aws-sam
