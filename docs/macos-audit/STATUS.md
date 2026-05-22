@@ -9,7 +9,7 @@ Phase 0 — Repo hygiene             ████████░░  80% (3 ру
 Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
-Phase 4 — Containers + Cloud       ░░░░░░░░░░   0%
+Phase 4 — Containers + Cloud       █████████░  90% (C1 ✅, C2 ✅, Cl1-3 ✅; C3 — kubeconfig тривіальний)
 Phase 5 — Desktop UX polish        ░░░░░░░░░░   0%
 Phase 6 — Nice-to-have CLI         ░░░░░░░░░░   0%
 Phase 7 — JetBrains/Claude polish  ░░░░░░░░░░   0%
@@ -100,7 +100,16 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (P4/S9) sesh 2.26.2. `~/.config/sesh/sesh.toml` з sources: tmux/zoxide/ghq/legacy project dirs. tmux keybind `Prefix+Space` → fzf-popup picker — 2026-05-22
 - [ ] (K4) chezmoi + 1Password — deferred (`onepasswordRead` built-in; no template needs secrets yet)
 
-## Phase 4-8
+## Phase 4 — Containers + Cloud + DevOps
+- [x] **DONE** (C1) Docker Desktop → OrbStack 2.1.3. OrbStack auto-took over docker context. Docker.app переміщено в Trash через Finder API. brew "docker" тепер з link (без `link: false`); + `docker-credential-helper` для osxkeychain (Docker Desktop постачав його як side-effect). Smoke test: `docker run --rm hello-world` ✅. Stale `desktop-linux` context видалено. — 2026-05-22
+  - **Залишок** (TCC-protected, видалити вручну через Finder): `~/Library/Containers/com.docker.docker`, `~/Library/Group Containers/group.com.docker`. Це orphan data, не критично.
+- [x] **DONE** (C2) k9s 0.32+, kubectx + kubens 0.11.0, dive 0.13.1, stern 1.34.0. kubectl також додано у Brewfile (було missing) — 2026-05-22
+- [ ] (C3) kubeconfig hygiene — `~/.kube/config` має лише один context `default` (k3s на Hetzner). Назву можна було б поміняти на `hetzner-k3s` для ясності, але це косметика. Не критично.
+- [x] **DONE** (Cl1) cloudflare-wrangler 4.93.0 — 2026-05-22
+- [x] **DONE** (Cl2) doctl 1.159.0 — 2026-05-22
+- [x] **DONE** (Cl3) hcloud 1.65.0 — 2026-05-22
+
+## Phase 5-8
 *Розгортаємо коли підійде черга. Деталі в SPEC.md.*
 
 ---
@@ -123,3 +132,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-22** — K5 (git commit signing via SSH) виконано. Окремий Ed25519 ключ створено всередині 1Password vault (приватка ніколи не торкала диск); локальна верифікація пройшла; GitHub Signing Key додано. `SSH_AUTH_SOCK` тепер експортовано в `.zshrc` → 1P agent socket. K4 (chezmoi+op) deferred — `onepasswordRead` працює built-in, доки немає use case.
 - **2026-05-22** — Phase 2 Shell foundation (S1-S6). atuin (local-only, history імпортовано), direnv, git-delta (gruvbox-dark, navigate, zdiff3), ripgrep тепер у Brewfile. EDITOR=nano per CLAUDE.md, MANPAGER=bat. `alias cd=z`. K6 (direnv+op pattern) deferred. Phase 2 у 90% (S7-S9 — modern CLI utils, tmux plugins, sesh — Layer 2 але поза Phase 2 скоупом, пізніше).
 - **2026-05-22** — Phase 3 Project workflow (P1-P4). mise замінив fnm у zshrc (legacy .nvmrc reading увімкнено). uv поставлено для нових Python. ghq з ~/ghq root. sesh з tmux Prefix+Space picker, sources: tmux/zoxide/ghq/legacy IdeaProjects/CLionProjects/WebstormProjects/projects.
+- **2026-05-22** — Phase 4 Containers + Cloud. OrbStack замінив Docker Desktop (Docker.app в Trash; orphan ~/Library/Containers/com.docker.* TCC-protected, не видалити CLI). k9s/kubectx/dive/stern для k8s. wrangler/doctl/hcloud для CF/DO/Hetzner. Docker CLI тепер через brew link, + docker-credential-helper.
