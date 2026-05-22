@@ -11,7 +11,7 @@ Phase 2 — Shell foundation         █████████░  90% (S1-S6 
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
 Phase 4 — Containers + Cloud       █████████░  90% (C1 ✅, C2 ✅, Cl1-3 ✅; C3 — kubeconfig тривіальний)
 Phase 5 — Desktop UX polish        ░░░░░░░░░░   0%
-Phase 6 — Nice-to-have CLI         ░░░░░░░░░░   0%
+Phase 6 — Nice-to-have CLI         ██████████ 100% (S7+S8+H1+DB1+L1-L3 ✅)
 Phase 7 — JetBrains/Claude polish  ░░░░░░░░░░   0%
 Phase 8 — Eventual                 ░░░░░░░░░░   0%
 ```
@@ -109,8 +109,15 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (Cl2) doctl 1.159.0 — 2026-05-22
 - [x] **DONE** (Cl3) hcloud 1.65.0 — 2026-05-22
 
-## Phase 5-8
-*Розгортаємо коли підійде черга. Деталі в SPEC.md.*
+## Phase 6 — Nice-to-have CLI
+- [x] **DONE** (S7) btop, dust, procs, sd, tealdeer (tldr), hyperfine, yq — 2026-05-22
+- [x] **DONE** (S8) tmux-resurrect + tmux-continuum через TPM. Auto-save 15хв, restore on start, capture-pane-contents — 2026-05-22
+- [x] **DONE** (H1) xh — modern HTTP client (HTTPie-compatible Rust impl) — 2026-05-22
+- [x] **DONE** (DB1) pgcli + mycli — 2026-05-22
+- [x] **DONE** (L1-L3) mkcert, watchexec (вже було, додано у Brewfile), gron — 2026-05-22
+
+## Phase 5, 7, 8
+*Розгортаємо коли підійде черга. Phase 5 — Desktop UX polish (UI-heavy: BetterDisplay, LinearMouse, AltTab, aerospace tweaks). Phase 7 — JetBrains/Claude polish. Phase 8 — eventual.*
 
 ---
 
@@ -133,3 +140,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-22** — Phase 2 Shell foundation (S1-S6). atuin (local-only, history імпортовано), direnv, git-delta (gruvbox-dark, navigate, zdiff3), ripgrep тепер у Brewfile. EDITOR=nano per CLAUDE.md, MANPAGER=bat. `alias cd=z`. K6 (direnv+op pattern) deferred. Phase 2 у 90% (S7-S9 — modern CLI utils, tmux plugins, sesh — Layer 2 але поза Phase 2 скоупом, пізніше).
 - **2026-05-22** — Phase 3 Project workflow (P1-P4). mise замінив fnm у zshrc (legacy .nvmrc reading увімкнено). uv поставлено для нових Python. ghq з ~/ghq root. sesh з tmux Prefix+Space picker, sources: tmux/zoxide/ghq/legacy IdeaProjects/CLionProjects/WebstormProjects/projects.
 - **2026-05-22** — Phase 4 Containers + Cloud. OrbStack замінив Docker Desktop (Docker.app в Trash; orphan ~/Library/Containers/com.docker.* TCC-protected, не видалити CLI). k9s/kubectx/dive/stern для k8s. wrangler/doctl/hcloud для CF/DO/Hetzner. Docker CLI тепер через brew link, + docker-credential-helper.
+- **2026-05-22** — Phase 6 Nice-to-have CLI (S7+S8+H1+DB1+L1-L3). 12 brews: btop/dust/procs/sd/tealdeer/hyperfine/yq/xh/pgcli/mycli/mkcert/gron + watchexec у Brewfile. tmux-resurrect + tmux-continuum через TPM (auto-save 15хв, restore on start, capture-pane-contents).
