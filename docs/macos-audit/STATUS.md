@@ -7,7 +7,7 @@
 ```
 Phase 0 — Repo hygiene             ████████░░  80% (3 ручні дії залишилось)
 Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
-Phase 2 — Shell foundation         ░░░░░░░░░░   0%
+Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         ░░░░░░░░░░   0%
 Phase 4 — Containers + Cloud       ░░░░░░░░░░   0%
 Phase 5 — Desktop UX polish        ░░░░░░░░░░   0%
@@ -85,15 +85,13 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - Built-in `onepasswordRead` template function працює без додаткового config. Налаштування зайвe доки немає template-ів з secrets. Активуємо коли з'явиться перший use case.
 
 ## Phase 2 — Shell foundation
-*Очікує Phase 1.*
-
-- [ ] (S1) ripgrep
-- [ ] (S2) atuin (local-only поки що)
-- [ ] (S3) direnv
-- [ ] (S4) git-delta
-- [ ] (S5) EDITOR/VISUAL/PAGER/MANPAGER env vars
-- [ ] (S6) `alias cd='z'`
-- [ ] (K6) direnv + 1Password pattern
+- [x] **DONE** (S1) ripgrep 15.1.0 (вже було, додано у Brewfile) — 2026-05-22
+- [x] **DONE** (S2) atuin 18.16.1 local-only (`--disable-up-arrow`, sync server defer до CachyOS). History імпортовано з ~/.zsh_history — 2026-05-22
+- [x] **DONE** (S3) direnv 2.37.1, hook у `.zshrc` — 2026-05-22
+- [x] **DONE** (S4) git-delta 0.19.2: `core.pager`, `interactive.diffFilter`, navigate, line-numbers, gruvbox-dark theme, `merge.conflictStyle=zdiff3`, `diff.colorMoved=default` — 2026-05-22
+- [x] **DONE** (S5) `EDITOR=nano` (per user CLAUDE.md context — nano для quick edits, не vim), `VISUAL=nano`, `PAGER=less`, `MANPAGER` через bat — 2026-05-22
+- [x] **DONE** (S6) `alias cd='z'` (zoxide) — 2026-05-22
+- [ ] (K6) direnv + 1Password pattern — defer разом з K4 до першого use case. Both work without setup; activate коли з'явиться `.envrc` що потребує secrets.
 
 ## Phase 3-8
 *Розгортаємо коли підійде черга. Деталі в SPEC.md.*
@@ -116,3 +114,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-22** — K2 + K3 виконано. SSH хід через 1Password agent (Touch ID), modern crypto (chacha20-poly1305 first), ControlMaster, hashed known_hosts. Duplicate `Host 71.9.27.70` → `pool-71`/`deploy-71`. `staging-es.l-club.biz` → alias для 95.216.202.206. ~/.ssh/config тепер у chezmoi (`private_dot_ssh/config`). `UseKeychain` видалено — несумісне з Homebrew openssh і непотрібне з 1P agent.
 - **2026-05-22** — Розпочато CachyOS bootstrap проект (`docs/cachyos-setup/`). Phase 4 D6 (tailscale) front-run-ить як частина mesh-доступу MacBook → CachyOS. Cask `tailscale-app` install чекає TTY-sudo (user manual action).
 - **2026-05-22** — K5 (git commit signing via SSH) виконано. Окремий Ed25519 ключ створено всередині 1Password vault (приватка ніколи не торкала диск); локальна верифікація пройшла; GitHub Signing Key додано. `SSH_AUTH_SOCK` тепер експортовано в `.zshrc` → 1P agent socket. K4 (chezmoi+op) deferred — `onepasswordRead` працює built-in, доки немає use case.
+- **2026-05-22** — Phase 2 Shell foundation (S1-S6). atuin (local-only, history імпортовано), direnv, git-delta (gruvbox-dark, navigate, zdiff3), ripgrep тепер у Brewfile. EDITOR=nano per CLAUDE.md, MANPAGER=bat. `alias cd=z`. K6 (direnv+op pattern) deferred. Phase 2 у 90% (S7-S9 — modern CLI utils, tmux plugins, sesh — Layer 2 але поза Phase 2 скоупом, пізніше).
