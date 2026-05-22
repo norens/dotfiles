@@ -10,9 +10,9 @@ Phase 1 — Безпека + дані           █████████░  
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
 Phase 4 — Containers + Cloud       █████████░  90% (C1 ✅, C2 ✅, Cl1-3 ✅; C3 — kubeconfig тривіальний)
-Phase 5 — Desktop UX polish        █████░░░░░  50% (W1/W3/W5/E0 ✅; Q1-Q3/W2/Q5 manual UI)
+Phase 5 — Desktop UX polish        ███████░░░  75% (W1/W3/W5/E0 ✅, Q1-Q3 installed; Q5/W2 manual config)
 Phase 6 — Nice-to-have CLI         ██████████ 100% (S7+S8+H1+DB1+L1-L3 ✅)
-Phase 7 — JetBrains/Claude polish  █████░░░░░  50% (E5 part ✅; E2/E3/E6 manual or deferred)
+Phase 7 — JetBrains/Claude polish  ███████░░░  75% (E3+E5 ✅; E2 manual, E6 deferred)
 Phase 8 — Eventual                 ░░░░░░░░░░   0%
 ```
 
@@ -118,7 +118,7 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 
 ## Phase 7 — JetBrains/Claude polish
 - [ ] **MANUAL** (E2) JetBrains Settings Sync через account: у кожній IDE (IntelliJ/PyCharm/WebStorm/GoLand/CLion) Settings → Settings Sync → Enable Settings Sync → sign in з JetBrains account. Без CC-частини.
-- [ ] **MANUAL** (E3) Toolbox CLI shims: JetBrains Toolbox → Settings (⚙ icon) → Tools → Shell Scripts → Generate shell scripts ON, location `~/.local/bin` (or `~/bin`). Це створить `idea`/`pycharm`/`webstorm`/`goland`/`clion`/`datagrip`/`rubymine` як CLI entry points.
+- [x] **DONE** (E3) Toolbox CLI shims: location `/usr/local/bin` (GUI PATH visibility — `~/.local/bin` не в GUI PATH без `/etc/paths.d/` entry). Shims на місці: `idea`, `pycharm`, `webstorm`, `clion` — 2026-05-22
 - [x] **DONE** (E5 part) `~/.claude/settings.json` (plugin enablement, voice, effortLevel, statusline) і `~/.claude/statusline-command.sh` (Gruvbox progress bar) у chezmoi. Не track: `projects/`, `cache/`, `debug/`, `file-history/`, `history.jsonl`, `tasks/`, `telemetry/`, `shell-snapshots/` — runtime state. — 2026-05-22
 - [ ] (E6) Claude Desktop MCP config — **deferred**. `claude_desktop_config.json` зараз має тільки `preferences` (без `mcpServers`). Tracking ризикує: якщо колись додаси MCP server з API key, ключ потрапить у github push. Активувати через `.tmpl` + `onepasswordRead` коли з'явиться перший MCP server з secret env.
 
@@ -127,9 +127,9 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (W3) Arc вже видалений раніше. Aerospace `ctrl-alt-cmd-b` тепер запускає Firefox Developer Edition замість dead `Arc` — 2026-05-22
 - [x] **DONE** (W5) Screenshot defaults: location=`~/Pictures/Screenshots/`, type=png, disable-shadow=true, include-date=true. `killall SystemUIServer` для applied — 2026-05-22
 - [x] **DONE** (E0) Shelfware cleanup: видалено cursor, codex, postman, warp casks + `~/.config/github-copilot/`. brew autoremove забрав ripgrep як `unneeded` (був deps Cursor), re-install — 2026-05-22
-- [ ] **MANUAL** (Q1) BetterDisplay — `brew install --cask betterdisplay` + GUI config (BenQ DDC/CI)
-- [ ] **MANUAL** (Q2) LinearMouse — `brew install --cask linearmouse`, потім видалити mos + Logi Options+ налаштувати окремо
-- [ ] **MANUAL** (Q3) AltTab — `brew install --cask alt-tab` + GUI bindings
+- [x] **DONE** (Q1) BetterDisplay 4.3.3 installed. **MANUAL config**: Launch → grant accessibility → BenQ DDC/CI controls (brightness, contrast) — 2026-05-22
+- [x] **DONE** (Q2) LinearMouse 0.11.2 installed. **MANUAL config**: launch → System Settings → Accessibility → grant; configure per-device settings. Видалити `mos` cask коли LinearMouse повністю замінить (зараз обидва є — оверлап OK на transition). — 2026-05-22
+- [x] **DONE** (Q3) AltTab 11.0.0 installed. **MANUAL config**: launch → grant accessibility → налаштувати bindings (Cmd+Tab override опц.) — 2026-05-22
 - [ ] **MANUAL** (Q4) Aerospace floating window rules — залежить від apps які користувач хоче floating
 - [ ] **MANUAL** (Q5) workspace-to-monitor-force-assignment (BenQ primary) — залежить від поточного monitor layout
 - [ ] **MANUAL** (W2) Firefox Multi-Account Containers extension — install з addons.mozilla.org
@@ -161,3 +161,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-22** — Phase 6 Nice-to-have CLI (S7+S8+H1+DB1+L1-L3). 12 brews: btop/dust/procs/sd/tealdeer/hyperfine/yq/xh/pgcli/mycli/mkcert/gron + watchexec у Brewfile. tmux-resurrect + tmux-continuum через TPM (auto-save 15хв, restore on start, capture-pane-contents).
 - **2026-05-22** — Phase 7 part: `~/.claude/{settings.json,statusline-command.sh}` tracked. E2 (Settings Sync) і E3 (Toolbox shims) — manual UI. E6 (Claude Desktop MCP) — deferred до першого MCP server з secrets (activate via `.tmpl` + `onepasswordRead`).
 - **2026-05-22** — Phase 5 cleanup: W1/W3/W5/E0 виконано. Shelfware (cursor/codex/postman/warp + github-copilot config) видалено. Aerospace перебіндив Arc-binding на Firefox Dev Edition. Screenshots тепер у ~/Pictures/Screenshots/ (png, no shadow, with date). Q1-Q3 (BetterDisplay/LinearMouse/AltTab) лишаються MANUAL UI-tweaks.
+- **2026-05-22** — Phase 5 Q1-Q3 casks installed (betterdisplay 4.3.3, linearmouse 0.11.2, alt-tab 11.0.0). GUI config — окремою сесією. Phase 0 закрита: GitHub repo `norens/macos-configs` archived, локальний clone в IdeaProjects видалено. Phase 7 E3 (Toolbox CLI shims) done — shims у /usr/local/bin. Аудит у фінальному стані: всі CC-фази 75-100%, manual UI лишається.
