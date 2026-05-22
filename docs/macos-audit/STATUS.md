@@ -6,7 +6,7 @@
 
 ```
 Phase 0 — Repo hygiene             ████████░░  80% (3 ручні дії залишилось)
-Phase 1 — Безпека + дані           ████████░░  80% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, B1 чекає SSD)
+Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         ░░░░░░░░░░   0%
 Phase 3 — Project workflow         ░░░░░░░░░░   0%
 Phase 4 — Containers + Cloud       ░░░░░░░░░░   0%
@@ -73,6 +73,17 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 ### (Sec) raycast token guard
 - [x] **DONE** Додано `.config/raycast` у `.chezmoiignore` (2026-05-20)
 
+### (K5) Git commit signing via SSH (1Password) ✅
+- [x] **DONE** Створено окремий Ed25519 ключ у 1Password (`SSH: git signing (Ed25519)`) — приватка ніколи не торкала диск — 2026-05-22
+- [x] **DONE** `~/.gitconfig`: `gpg.format ssh`, `commit.gpgsign true`, `tag.gpgsign true`, `user.signingkey` inline — 2026-05-22
+- [x] **DONE** `~/.config/git/allowed_signers` — для локальної верифікації — 2026-05-22
+- [x] **DONE** `SSH_AUTH_SOCK` → 1P agent socket у `.zshrc` (необхідно для git's ssh-keygen, бо він не читає ssh_config IdentityAgent) — 2026-05-22
+- [x] **DONE** Local verify: test commit `c197cf5` → `Good "git" signature for nazarfedishin@gmail.com with ED25519 key SHA256:s5ldt8En...` (відкочено після перевірки) — 2026-05-22
+- [x] **DONE** GitHub Signing Key додано — 2026-05-22
+
+### (K4) chezmoi + 1Password — DEFERRED
+- Built-in `onepasswordRead` template function працює без додаткового config. Налаштування зайвe доки немає template-ів з secrets. Активуємо коли з'явиться перший use case.
+
 ## Phase 2 — Shell foundation
 *Очікує Phase 1.*
 
@@ -104,3 +115,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-21** — K1 (1Password міграція з Apple Passwords) + B2 (restic→R2 daily backup) реалізовано. Targets B2 скорочені до chezmoi-only (DECISIONS 2026-05-21). Залишається: Safari extension (K1, тривіально), B1 (купити SSD), K2-K5 (SSH + git signing).
 - **2026-05-22** — K2 + K3 виконано. SSH хід через 1Password agent (Touch ID), modern crypto (chacha20-poly1305 first), ControlMaster, hashed known_hosts. Duplicate `Host 71.9.27.70` → `pool-71`/`deploy-71`. `staging-es.l-club.biz` → alias для 95.216.202.206. ~/.ssh/config тепер у chezmoi (`private_dot_ssh/config`). `UseKeychain` видалено — несумісне з Homebrew openssh і непотрібне з 1P agent.
 - **2026-05-22** — Розпочато CachyOS bootstrap проект (`docs/cachyos-setup/`). Phase 4 D6 (tailscale) front-run-ить як частина mesh-доступу MacBook → CachyOS. Cask `tailscale-app` install чекає TTY-sudo (user manual action).
+- **2026-05-22** — K5 (git commit signing via SSH) виконано. Окремий Ed25519 ключ створено всередині 1Password vault (приватка ніколи не торкала диск); локальна верифікація пройшла; GitHub Signing Key додано. `SSH_AUTH_SOCK` тепер експортовано в `.zshrc` → 1P agent socket. K4 (chezmoi+op) deferred — `onepasswordRead` працює built-in, доки немає use case.

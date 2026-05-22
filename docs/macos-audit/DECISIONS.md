@@ -43,3 +43,16 @@
 
 ### Hammerspoon — пропустили
 **Чому**: без конкретного use case Lua scripting overkill. aerospace + sketchybar покривають 90% потреб.
+
+## 2026-05-21
+
+### B2 targets: видалити `~/projects` з backup
+**Контекст**: початково SPEC включав `~/projects` (~632MB) в restic targets. Юзер уточнив: ця папка — старі/архівні речі, активні проекти живуть у git (push to remote = off-site backup).
+**Вибрано**: targets = тільки `~/Documents` + `~/.local/share/chezmoi`. **Чому**: backup має сенс для unrecoverable artifacts (особисті документи, конфіги, не-pushed work). Git-tracked code дублювати на R2 — марно (git remote вже off-site).
+**Implication**: якщо в `~/projects` колись з'явиться щось не-у-git — або push, або переніс у `~/Documents`, або додай target явно.
+
+### B2 targets: видалити `~/Documents` теж (final scope: chezmoi-only)
+**Контекст**: після видалення `~/projects` лишався `~/Documents`. Виявили що `FXICloudDriveDocuments=1` — Documents синкаються в iCloud Drive (Apple's редундантне зберігання + 30-day Recently Deleted recovery). Більшість контенту — game saves (Enter the Gungeon 352MB), Viber media (132MB), Arduino toolchain (34MB) — restorable / replaceable.
+**Вибрано**: targets = тільки `~/.local/share/chezmoi`. **Чому**: iCloud покриває `~/Documents` адекватно для personal docs. restic→R2 має сенс для (а) того що НЕ в iCloud, (б) того що ми хочемо у форматі versioned snapshots з нашим encryption key. `chezmoi` — критичні конфіги, source-of-truth, не-в-iCloud (live за межами home → не покривається Apple Documents sync).
+**Trade-off**: backup залишається мінімальним (~400KB raw). Якщо колись з'явиться irreplaceable не-iCloud дата (offline workspace, локальний DB dump, etc.) — додати окремий target. R2 free tier 10GB дає величезний запас.
+**Альтернатива розглянуто**: whitelist конкретних папок з ~/Documents — відкинули, бо нічого критичного не виділили.
