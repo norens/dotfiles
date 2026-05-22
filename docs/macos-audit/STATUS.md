@@ -5,7 +5,7 @@
 ## Загальний прогрес
 
 ```
-Phase 0 — Repo hygiene             ████████░░  80% (3 ручні дії залишилось)
+Phase 0 — Repo hygiene             ██████████ 100%
 Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
@@ -20,9 +20,9 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 
 - [x] **DONE** Зберегти `cachyos-setup-tasks.md` у chezmoi (commit `f254517`)
 - [x] **DONE** Створити workspace `~/docs/macos-audit/` для постійної роботи
-- [ ] **MANUAL** Архівувати GitHub repo: `gh repo archive norens/macos-configs --yes`
-- [ ] **MANUAL** Видалити `~/IdeaProjects/macos-configs/` (після `cd ~`): `rm -rf ~/IdeaProjects/macos-configs`
-- [ ] **MANUAL** Перевірити `~/macos-configs/` (тільки `.claude` і `.idea` workspace metadata): `rm -rf ~/macos-configs` якщо не треба
+- [x] **DONE** GitHub repo `norens/macos-configs` уже archived (verified via API) — 2026-05-22
+- [x] **DONE** Видалено `~/IdeaProjects/macos-configs/` (484KB clone, source on archived GitHub recoverable) — 2026-05-22
+- [x] **DONE** `~/macos-configs/` не існує (вже видалено раніше)
 
 ## Phase 1 — Безпека + дані (CRITICAL)
 
