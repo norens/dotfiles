@@ -1,0 +1,7 @@
+[tools]
+node = "24.12.0"
+
+[settings]
+# Read legacy version files like .nvmrc so existing projects work without
+# converting to .tool-versions / .mise.toml.
+idiomatic_version_file_enable_tools = ["node"]

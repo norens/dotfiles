@@ -1,0 +1,35 @@
+[default_session]
+# Sort by last used.
+order = "RecencyOrder"
+
+# Pull projects from these sources, in order shown by `sesh connect`.
+[[startup_command]]
+# (no global startup command — per-session below)
+
+# === Sources ===
+
+# tmux sessions already running (so we can switch between them)
+[[default_source]]
+name = "tmux"
+paths = []
+
+# zoxide top dirs (frecency-ranked dirs you actually cd into)
+[[default_source]]
+name = "zoxide"
+paths = []
+
+# ghq repos (~/ghq/...) — new project home
+[[default_source]]
+name = "ghq"
+paths = ["~/ghq"]
+
+# Project roots scanned for git repos (legacy locations until repos move to ghq)
+[[default_source]]
+name = "config"
+paths = [
+  "~/projects",
+  "~/IdeaProjects",
+  "~/CLionProjects",
+  "~/WebstormProjects",
+  "~/.local/share/chezmoi",
+]

@@ -41,7 +41,8 @@ esac
 export BUN_INSTALL="$HOME/.bun"
 
 # Version managers
-eval "$(fnm env --use-on-cd --shell zsh)"
+# mise (Node primarily; reads .nvmrc, .tool-versions, .mise.toml). Replaces fnm.
+eval "$(mise activate zsh)"
 eval "$(pyenv init -)"
 eval "$(rbenv init - zsh)"
 

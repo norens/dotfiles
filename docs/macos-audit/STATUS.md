@@ -8,7 +8,7 @@
 Phase 0 — Repo hygiene             ████████░░  80% (3 ручні дії залишилось)
 Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
-Phase 3 — Project workflow         ░░░░░░░░░░   0%
+Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
 Phase 4 — Containers + Cloud       ░░░░░░░░░░   0%
 Phase 5 — Desktop UX polish        ░░░░░░░░░░   0%
 Phase 6 — Nice-to-have CLI         ░░░░░░░░░░   0%
@@ -93,7 +93,14 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (S6) `alias cd='z'` (zoxide) — 2026-05-22
 - [ ] (K6) direnv + 1Password pattern — defer разом з K4 до першого use case. Both work without setup; activate коли з'явиться `.envrc` що потребує secrets.
 
-## Phase 3-8
+## Phase 3 — Project workflow
+- [x] **DONE** (P1) mise 2026.5.13 — Node migration з fnm. `~/.config/mise/config.toml` з `idiomatic_version_file_enable_tools = ["node"]` щоб респектити `.nvmrc`. Global default `node@24.12.0`; test у `~/IdeaProjects/url-shortener/` resolved до `node@20.20.2` per .nvmrc. fnm лишився в Brewfile (transition fallback) — 2026-05-22
+- [x] **DONE** (P2) uv 0.11.16 (Astral). Для нових Python projects. Не торкає pyenv. — 2026-05-22
+- [x] **DONE** (P3) ghq 1.10.1. `git config --global ghq.root '~/ghq'`. Майбутні `ghq get …` йдуть у `~/ghq/<host>/<owner>/<repo>` — 2026-05-22
+- [x] **DONE** (P4/S9) sesh 2.26.2. `~/.config/sesh/sesh.toml` з sources: tmux/zoxide/ghq/legacy project dirs. tmux keybind `Prefix+Space` → fzf-popup picker — 2026-05-22
+- [ ] (K4) chezmoi + 1Password — deferred (`onepasswordRead` built-in; no template needs secrets yet)
+
+## Phase 4-8
 *Розгортаємо коли підійде черга. Деталі в SPEC.md.*
 
 ---
@@ -115,3 +122,4 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - **2026-05-22** — Розпочато CachyOS bootstrap проект (`docs/cachyos-setup/`). Phase 4 D6 (tailscale) front-run-ить як частина mesh-доступу MacBook → CachyOS. Cask `tailscale-app` install чекає TTY-sudo (user manual action).
 - **2026-05-22** — K5 (git commit signing via SSH) виконано. Окремий Ed25519 ключ створено всередині 1Password vault (приватка ніколи не торкала диск); локальна верифікація пройшла; GitHub Signing Key додано. `SSH_AUTH_SOCK` тепер експортовано в `.zshrc` → 1P agent socket. K4 (chezmoi+op) deferred — `onepasswordRead` працює built-in, доки немає use case.
 - **2026-05-22** — Phase 2 Shell foundation (S1-S6). atuin (local-only, history імпортовано), direnv, git-delta (gruvbox-dark, navigate, zdiff3), ripgrep тепер у Brewfile. EDITOR=nano per CLAUDE.md, MANPAGER=bat. `alias cd=z`. K6 (direnv+op pattern) deferred. Phase 2 у 90% (S7-S9 — modern CLI utils, tmux plugins, sesh — Layer 2 але поза Phase 2 скоупом, пізніше).
+- **2026-05-22** — Phase 3 Project workflow (P1-P4). mise замінив fnm у zshrc (legacy .nvmrc reading увімкнено). uv поставлено для нових Python. ghq з ~/ghq root. sesh з tmux Prefix+Space picker, sources: tmux/zoxide/ghq/legacy IdeaProjects/CLionProjects/WebstormProjects/projects.
