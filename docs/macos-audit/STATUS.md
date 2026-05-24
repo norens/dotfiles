@@ -9,7 +9,7 @@ Phase 0 — Repo hygiene             ██████████ 100%
 Phase 1 — Безпека + дані           █████████░  90% (B2 ✅, K1 ✅, K2 ✅, K3 ✅, K5 ✅, B1 чекає SSD)
 Phase 2 — Shell foundation         █████████░  90% (S1-S6 ✅, K6 deferred)
 Phase 3 — Project workflow         █████████░  90% (P1-P4 ✅, K4/K6 deferred)
-Phase 4 — Containers + Cloud       █████████░  90% (C1 ✅, C2 ✅, Cl1-3 ✅; C3 — kubeconfig тривіальний)
+Phase 4 — Containers + Cloud       ██████████ 100% (C1 ✅, C2 ✅, C3 ✅, Cl1-3 ✅)
 Phase 5 — Desktop UX polish        █████████░  90% (W1-W3/W5/E0/Q1-Q3/Q5/W2 ✅; Q4 floating rules — без use case)
 Phase 6 — Nice-to-have CLI         ██████████ 100% (S7+S8+H1+DB1+L1-L3 ✅)
 Phase 7 — JetBrains/Claude polish  █████████░  90% (E2/E3/E5 ✅; E6 deferred)
@@ -104,7 +104,7 @@ Phase 8 — Eventual                 ░░░░░░░░░░   0%
 - [x] **DONE** (C1) Docker Desktop → OrbStack 2.1.3. OrbStack auto-took over docker context. Docker.app переміщено в Trash через Finder API. brew "docker" тепер з link (без `link: false`); + `docker-credential-helper` для osxkeychain (Docker Desktop постачав його як side-effect). Smoke test: `docker run --rm hello-world` ✅. Stale `desktop-linux` context видалено. — 2026-05-22
   - **Залишок** (TCC-protected, видалити вручну через Finder): `~/Library/Containers/com.docker.docker`, `~/Library/Group Containers/group.com.docker`. Це orphan data, не критично.
 - [x] **DONE** (C2) k9s 0.32+, kubectx + kubens 0.11.0, dive 0.13.1, stern 1.34.0. kubectl також додано у Brewfile (було missing) — 2026-05-22
-- [ ] (C3) kubeconfig hygiene — `~/.kube/config` має лише один context `default` (k3s на Hetzner). Назву можна було б поміняти на `hetzner-k3s` для ясності, але це косметика. Не критично.
+- [x] **DONE** (C3) kubeconfig hygiene — context/cluster/user `default` → `hetzner-k3s` через `yq` (точкові edits, не sed). Backup `~/.kube/config.bak-pre-c3`. Verify: `kubectl --context=hetzner-k3s get nodes` → `nazarf Ready control-plane,master 235d v1.33.4+k3s1` — 2026-05-24
 - [x] **DONE** (Cl1) cloudflare-wrangler 4.93.0 — 2026-05-22
 - [x] **DONE** (Cl2) doctl 1.159.0 — 2026-05-22
 - [x] **DONE** (Cl3) hcloud 1.65.0 — 2026-05-22
