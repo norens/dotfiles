@@ -304,7 +304,7 @@ For sustained 8-hour training:
 ### Cloudflare Tunnel + Access
 
 - `cloudflared tunnel create home-ml` on CachyOS.
-- Public hostname `ollama.norens.dev` (Cloudflare DNS).
+- Public hostname `ollama.nazarf.dev` (Cloudflare DNS).
 - Cloudflare Access policy: email allow-list for browser access; service tokens for server-to-server.
 - Free tier covers up to 50 users.
 
@@ -361,7 +361,7 @@ Not rewriting `~/cachyos-setup-tasks.md` whole. Instead:
 ## Open questions (none blocking — defaults chosen)
 
 - **NGC API key signup** is manual and free; user creates account first time before Phase 5b.
-- **Cloudflare Tunnel hostname** — using `norens.dev` (existing CF zone) implied; user confirms or picks different subdomain at Phase 5c.
+- **Cloudflare Tunnel hostname** — using `nazarf.dev` (existing CF zone) implied; user confirms or picks different subdomain at Phase 5c.
 - **24/7 vs WoL** — defaulting to 24/7; revisit after a month.
 
 ---
