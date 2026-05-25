@@ -1,0 +1,35 @@
+# Ollama always-on LLM container (Tailscale-only)
+# Created 2026-05-25 for ML Foundation Slice Plan 1 Task 6+7
+# Spec: docs/cachyos-setup/specs/2026-05-24-ml-robotics-stack-design.md §5
+# Not chezmoi-managed yet (cross-OS templating is a deferred sub-project).
+
+[Unit]
+Description=Ollama LLM service (always-on, Tailscale-only)
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Container]
+ContainerName=ollama
+Image=docker.io/ollama/ollama:latest
+AutoUpdate=registry
+
+# GPU via CDI
+AddDevice=nvidia.com/gpu=all
+
+# Bind only on Tailscale interface — never on public LAN
+PublishPort=100.104.21.28:11434:11434
+
+# Persistent model storage on @ml-data subvol (nodatacow inherited)
+Volume=%h/ml-data/ollama-models:/root/.ollama:Z
+
+# Tuning
+Environment=OLLAMA_KEEP_ALIVE=10m
+Environment=OLLAMA_NUM_PARALLEL=2
+
+[Service]
+TimeoutStartSec=600
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
