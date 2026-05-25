@@ -7,7 +7,7 @@
 ```
 Phase 0 — Pre-install Windows     ██████████ 100% (вже виконано)
 Phase 1 — CachyOS install         ██████████ 100% (system bootstraps, user logged in)
-Bootstrap (this workspace)        ████████░░  80% (Tailscale + SSH + 1P keys ✅; claude-code on CachyOS — deferred)
+Bootstrap (this workspace)        █████████░  95% (Tailscale + SSH + 1P keys ✅; cross-OS chezmoi migration ✅ 2026-05-25; claude-code on CachyOS — deferred)
 Phase 1.5 — ML storage subvols    ██████████ 100% (Plan 1, 2026-05-25)
 Phase 2 — NVIDIA + CUDA           █████████░  90% (driver 595.71.05 + nvidia-container-toolkit + CDI; kanata/Hyprland pending)
 Phase 3 — Keyboard parity         ░░░░░░░░░░   0%
@@ -65,6 +65,7 @@ Phase 8 — Polish                  ░░░░░░░░░░   0%
   - **Task 6-7:** Ollama Quadlet у `~/.config/containers/systemd/ollama.container`. **НЕ chezmoi-managed** (cross-OS templating deferred). `PublishPort=100.104.21.28:11434:11434` — bind тільки на Tailscale interface. Volume `~/ml-data/ollama-models` (Z relabel). `TimeoutStartSec=600` (default 90s занадто короткий для image pull). Image (6.55 GB!) pulled manually перед service start щоб уникнути restart-loop на pull-timeout. Service `active (running)`. `loginctl enable-linger nazarf` → service survive logout. Quadlets НЕ потрібно `systemctl enable` — `[Install]` секція робить це автоматично через generator.
   - **Task 8:** Pull `qwen2.5-coder:7b` + `qwen2.5:14b-instruct` (in progress).
   - **Task 9 phase 1:** E2E з MacBook ✅ — Tailscale magic-DNS `nazarf-cachyos` resolve, direct LAN connection (192.168.0.71), `curl http://nazarf-cachyos:11434/api/tags` повертає JSON.
+- **2026-05-25** — **Cross-OS chezmoi migration COMPLETE (Plan 2, `docs/cross-os-chezmoi/`):** обидві машини під одним `norens/dotfiles` репо. `.chezmoiignore.tmpl` фільтрує macOS-only (aerospace/karabiner/goku/sketchybar/brewfile/Library/...) і Linux-only (hypr/waybar/mako/kanata/containers) шляхи per-host. `~/.zshrc` тепер thin loader → `~/.zsh/{shared,darwin|linux}.zsh`. ML env (`HF_HOME`, `PODMAN_USERNS`) перенесено з ad-hoc CachyOS `~/.zshrc` у chezmoi-managed `linux.zsh`. `ollama.container` + `storage.conf` promoted у chezmoi. CachyOS `chezmoi managed` = 65 файлів (vs MacBook 140) — ignore template працює.
 - **Архітектурні рішення зафіксовані в журналі (не в spec, бо це implementation details):**
-  - Cross-OS chezmoi templating відкладено — на macOS і CachyOS у `~/.zshrc` різні файли, об'єднання в один template не варто складності зараз. Ml-related env додано напряму на CachyOS.
+  - Cross-OS chezmoi templating DONE (Plan 2). Раніше відкладалось — закрито 2026-05-25.
   - Rootless podman storage переїхав на `@ml-data/containers-rootless` (не на `@containers`). `@containers` залишений у fstab для майбутнього (якщо колись system-podman потрібен).
