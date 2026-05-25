@@ -1,0 +1,28 @@
+# Raycast token — never tracked, regardless of OS
+.config/raycast/config.json
+.DS_Store
+**/.DS_Store
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS-only paths — skip on non-Darwin
+.config/aerospace
+.config/karabiner
+.config/goku
+.config/sketchybar
+.config/jetbrains-keymaps
+.config/restic
+.config/gh
+.config/ghostty/shaders
+.tmux/plugins/tmux-ghostty-theme
+Library
+scripts/setup.sh
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+# Linux-only paths — skip on non-Linux
+.config/hypr
+.config/waybar
+.config/mako
+.config/kanata
+.config/containers
+{{ end }}
