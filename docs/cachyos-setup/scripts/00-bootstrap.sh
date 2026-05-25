@@ -170,33 +170,24 @@ fi
 log "Installing @anthropic-ai/claude-code..."
 npm install -g @anthropic-ai/claude-code
 
-# ---------- 7. chezmoi + dotfiles ----------
+# ---------- chezmoi ----------
 
 log "Installing chezmoi..."
-sudo pacman -S --noconfirm --needed chezmoi
-
-log ""
-log "Cloning dotfiles repo (norens/dotfiles)."
-log "If your GitHub access requires a key, ensure it's loaded via Tailscale-bridged 1Password agent, OR"
-log "use HTTPS clone (will prompt for PAT)."
-log ""
-ask "Use SSH (git@github.com) or HTTPS clone? [ssh/https]:" CLONE_MODE
-CLONE_MODE="${CLONE_MODE:-https}"
-
-if [[ "$CLONE_MODE" == "ssh" ]]; then
-  CHEZMOI_REPO="git@github.com:norens/dotfiles.git"
-else
-  CHEZMOI_REPO="https://github.com/norens/dotfiles.git"
+if ! command -v chezmoi >/dev/null 2>&1; then
+  sudo pacman -S --needed --noconfirm chezmoi
 fi
 
-log "Initializing chezmoi from $CHEZMOI_REPO ..."
-# NOTE: --apply might fail if cross-OS templates aren't ready yet. We do init-only here.
-chezmoi init "$CHEZMOI_REPO"
-
-log "chezmoi source ready at: ~/.local/share/chezmoi"
-log "Run 'chezmoi diff' to see what would be applied, then 'chezmoi apply' when ready."
-warn "Some dotfiles assume macOS (paths, brew). Cross-OS templating is a separate sub-project."
-warn "Don't blindly 'chezmoi apply' — review diff first."
+log "Bootstrapping dotfiles via chezmoi init --apply..."
+log "  (.chezmoiignore.tmpl filters out macOS-only paths.)"
+log "  Source: github.com/norens/dotfiles"
+chezmoi init --apply git@github.com:norens/dotfiles.git || {
+  warn "chezmoi init via SSH failed. Common reasons:"
+  warn "  - 1Password SSH agent not running (run '1password' to launch GUI + sign in)"
+  warn "  - GitHub SSH key not registered on this machine yet"
+  warn "Fallback: chezmoi init --apply https://github.com/norens/dotfiles.git (read-only, OK for now)"
+  exit 1
+}
+log "chezmoi apply complete. Open a NEW shell to load the new ~/.zshrc."
 
 # ---------- 8. Final report ----------
 
