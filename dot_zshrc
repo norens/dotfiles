@@ -1,91 +1,17 @@
-set -o vi
+# ~/.zshrc — thin loader; real config in ~/.zsh/{shared,darwin,linux}.zsh
+# Managed by chezmoi. Don't add config logic here — add it to the appropriate
+# fragment under ~/.zsh/.
 
-export GOKU_EDN_CONFIG_FILE=~/.config/goku/karabiner.edn
+ZSH_DIR="${ZDOTDIR:-$HOME}/.zsh"
 
-. ~/.zsh_aliases
+# 1. Shared (history, completion, options, cross-OS tool inits)
+[ -f "$ZSH_DIR/shared.zsh" ] && source "$ZSH_DIR/shared.zsh"
 
-# Homebrew
-eval "$(/usr/local/bin/brew shellenv)"
-
-# Completions
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fpath=($HOME/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-
-zstyle ':completion:*' list-prompt ''
-zstyle ':completion:*' select-prompt ''
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Plugins
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.bun/bin:$PATH"
-export PATH="./bin:$PATH"
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+# 2. OS-specific
+case "$(uname -s)" in
+  Darwin) [ -f "$ZSH_DIR/darwin.zsh" ] && source "$ZSH_DIR/darwin.zsh" ;;
+  Linux)  [ -f "$ZSH_DIR/linux.zsh" ]  && source "$ZSH_DIR/linux.zsh"  ;;
 esac
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-
-# Version managers
-# mise (Node primarily; reads .nvmrc, .tool-versions, .mise.toml). Replaces fnm.
-eval "$(mise activate zsh)"
-eval "$(pyenv init -)"
-eval "$(rbenv init - zsh)"
-
-# 1Password SSH agent — used by tools that read SSH_AUTH_SOCK (git signing, etc.)
-# ssh(1) itself uses IdentityAgent from ~/.ssh/config and doesn't need this.
-export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
-# Editor / pager
-export EDITOR=nano
-export VISUAL=nano
-export PAGER=less
-export MANPAGER="sh -c 'col -bx | bat -l man -p --paging=always'"
-export BAT_THEME=gruvbox-dark
-
-# Tools
-eval "$(zoxide init zsh)"
-eval "$(direnv hook zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
-eval $(thefuck --alias f)
-eval "$(starship init zsh)"
-
-# fzf
-source <(fzf --zsh)
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -200'"
-
-# History
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt SHARE_HISTORY
-
-# Globals
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
-alias clear="printf '\33c\e[3J'"
-
-export GEM_HOME=$HOME/.gem
-export PATH="$PATH:$HOME/.gem/bin"
+# 3. Host-local override (NOT chezmoi-tracked; create manually if needed)
+[ -f "$ZSH_DIR/local.zsh" ] && source "$ZSH_DIR/local.zsh"
