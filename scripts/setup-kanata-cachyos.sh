@@ -49,7 +49,7 @@ After=systemd-user-sessions.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/kanata --cfg /home/${USER}/.config/kanata/keychron.kbd --watch-devices
+ExecStart=/usr/bin/kanata --cfg /home/${USER}/.config/kanata/keychron.kbd
 Restart=on-failure
 RestartSec=5
 User=${USER}

@@ -7,10 +7,12 @@
 (defcfg
   process-unmapped-keys yes
   log-layer-changes no
-  ;; Match any device whose name contains "Keychron" (case-insensitive).
-  ;; --watch-devices flag on the kanata daemon hot-attaches when the
-  ;; Keychron re-appears via KVM toggle.
+  ;; Match any device whose name contains "Keychron" (case-insensitive substring).
   linux-dev-names-include ("Keychron" "keychron")
+  ;; Allow kanata to start even when Keychron is not currently attached
+  ;; (KVM may be on MacBook). kanata polls for matching devices when udev
+  ;; emits attach events — auto-discovers Keychron after KVM toggle.
+  linux-continue-if-no-devs-found yes
 )
 
 (defsrc
