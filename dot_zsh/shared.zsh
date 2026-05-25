@@ -39,6 +39,8 @@ export BAT_THEME=gruvbox-dark
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+# thefuck — guarded since it's not always installed (e.g. fresh CachyOS)
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias f)"
 eval "$(starship init zsh)"
 
 # --- fzf (cross-OS env; OS-specific keybinding source lives in darwin.zsh / linux.zsh) ---
