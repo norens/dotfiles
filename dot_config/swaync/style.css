@@ -1,0 +1,60 @@
+/* swaync — Gruvbox Dark Hard
+ * Spec: docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md §5
+ */
+
+* {
+  font-family: "JetBrainsMonoNL Nerd Font Propo", system-ui, sans-serif;
+  font-size: 13px;
+}
+
+.notification-row {
+  outline: none;
+  margin: 6px 8px;
+}
+
+.notification-background .notification {
+  background: #282828;
+  color: #ebdbb2;
+  border: 1px solid #3c3836;
+  border-radius: 8px;
+  padding: 12px;
+}
+.notification-background .notification.critical {
+  border-color: #fb4934;
+}
+
+.notification .summary {
+  color: #fabd2f;
+  font-weight: 700;
+}
+
+.notification .body { color: #ebdbb2; }
+
+.control-center {
+  background: #1d2021;
+  color: #ebdbb2;
+  border: 1px solid #3c3836;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.control-center .widget-title { color: #fabd2f; font-weight: 700; }
+.control-center button {
+  background: #3c3836;
+  color: #ebdbb2;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+.control-center button:hover { background: #504945; }
+
+.control-center .notification-row .notification {
+  background: #282828;
+  border: 1px solid #3c3836;
+}
+
+.widget-dnd > switch {
+  background: #3c3836;
+  border-radius: 12px;
+}
+.widget-dnd > switch:checked { background: #fabd2f; }

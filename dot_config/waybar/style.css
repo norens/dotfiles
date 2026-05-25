@@ -1,0 +1,64 @@
+/* Waybar — Gruvbox Dark Hard
+ * Spec: docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md §4
+ */
+
+* {
+  font-family: "JetBrainsMonoNL Nerd Font Propo", monospace;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+window#waybar {
+  background: #1d2021;
+  color: #ebdbb2;
+  border-bottom: 1px solid #3c3836;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  margin: 2px 2px;
+  color: #928374;
+  background: transparent;
+  border-radius: 4px;
+}
+#workspaces button.active {
+  color: #1d2021;
+  background: #fabd2f;
+  font-weight: 700;
+}
+#workspaces button:hover {
+  background: #3c3836;
+  color: #ebdbb2;
+}
+
+#window {
+  padding: 0 10px;
+  color: #d5c4a1;
+}
+
+#clock {
+  padding: 0 12px;
+  font-weight: 600;
+  color: #ebdbb2;
+}
+
+#custom-gpu-temp,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#language {
+  padding: 0 10px;
+  margin: 4px 2px;
+  background: #3c3836;
+  color: #ebdbb2;
+  border-radius: 4px;
+}
+
+#custom-gpu-temp.warning { color: #fe8019; }
+#custom-gpu-temp.critical { color: #fb4934; }
+#network.disconnected,
+#pulseaudio.muted { color: #928374; }
+
+#tray { padding: 0 8px; }
+#tray > .needs-attention { background: #fb4934; }

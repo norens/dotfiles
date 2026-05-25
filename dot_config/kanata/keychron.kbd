@@ -1,0 +1,27 @@
+;; kanata — Keychron K3 macOS-parity remap
+;; Spec: docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md §2
+;;
+;; Match by device NAME REGEX so it survives KVM disconnect/reconnect
+;; without needing hardcoded /dev/input/eventN.
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  ;; Match any device whose name contains "Keychron" (case-insensitive).
+  ;; --watch-devices flag on the kanata daemon hot-attaches when the
+  ;; Keychron re-appears via KVM toggle.
+  linux-dev-names-include ("Keychron" "keychron")
+)
+
+(defsrc
+  caps  lalt  lmet  ralt
+)
+
+(defalias
+  cesc (tap-hold 200 200 esc lctl)   ;; Caps Lock: tap=Esc, hold=LCtrl
+)
+
+(deflayer base
+  ;; Caps     left-Alt   left-Super   right-Alt
+  @cesc       lmet       lalt         ralt
+)

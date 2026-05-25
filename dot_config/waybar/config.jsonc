@@ -1,0 +1,77 @@
+// Waybar — top bar, Gruvbox-themed.
+// Spec: docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md §4
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 6,
+
+  "modules-left":   ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right":  [
+    "custom/gpu-temp",
+    "cpu",
+    "memory",
+    "network",
+    "pulseaudio",
+    "hyprland/language",
+    "tray"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate"
+  },
+
+  "hyprland/window": {
+    "max-length": 60,
+    "separate-outputs": true
+  },
+
+  "clock": {
+    "format": "{:%H:%M  %a %d %b}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+
+  "custom/gpu-temp": {
+    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | awk '{print \"  \" $1 \"°\"}'",
+    "interval": 5,
+    "tooltip": false
+  },
+
+  "cpu": {
+    "format": "CPU {usage}%",
+    "interval": 5
+  },
+
+  "memory": {
+    "format": "{used:0.1f}G/{total:0.0f}G",
+    "interval": 5
+  },
+
+  "network": {
+    "format-ethernet": "  {ifname}",
+    "format-wifi": "  {essid}",
+    "format-disconnected": "  off",
+    "tooltip-format": "{ipaddr}  ↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
+    "interval": 5
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "  muted",
+    "format-icons": { "default": ["", "", ""] },
+    "on-click": "pavucontrol"
+  },
+
+  "hyprland/language": {
+    "format": "{short}",
+    "format-en": "EN",
+    "format-uk": "UA"
+  },
+
+  "tray": {
+    "spacing": 8,
+    "icon-size": 18
+  }
+}
