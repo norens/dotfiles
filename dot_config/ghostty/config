@@ -32,9 +32,12 @@ keybind = cmd+e=reset_font_size
 keybind = cmd+enter=toggle_fullscreen
 keybind = shift+enter=text:\x1b\r
 
-# Cmd+C / Cmd+V copy-paste — Ghostty treats `cmd` and `super` as synonyms,
-# so this binds the macOS Cmd key on macOS and the Keychron K3 Mac-mode
-# Cmd key (LSUPER) on Linux/Hyprland. `performable:` lets the copy bind
-# fall through to the TUI (e.g. fzf, btop) when nothing is selected.
+# Cmd+C / Cmd+V copy-paste:
+#  - macOS: `cmd+` matches the real Cmd key.
+#  - Linux: kanata maps physical Cmd → LCTRL ("Kinto-style"), so we ALSO
+#    need ctrl+c / ctrl+v bound. `performable:` on ctrl+c lets the copy
+#    fall through to the TUI/shell (SIGINT, fzf cancel) when no selection.
 keybind = performable:cmd+c=copy_to_clipboard
 keybind = cmd+v=paste_from_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard

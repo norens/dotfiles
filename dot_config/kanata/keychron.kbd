@@ -15,17 +15,19 @@
   linux-continue-if-no-devs-found yes
 )
 
-;; NOTE: original spec swapped lAlt↔lMet so macOS users on PC keyboards would
-;; get a macOS-order Cmd/Opt cluster. Keychron K3 in **Mac mode** already
-;; ships keycodes in macOS order at the hardware level — the physical "Cmd"
-;; key already emits LSUPER, "Opt" emits LALT. Applying the swap on top of
-;; that REVERSES it: physical Cmd would emit Alt and break $mainMod=SUPER
-;; binds in Hyprland (Cmd+Space launcher, Cmd+Shift+3 screenshot, etc).
+;; Cmd → Ctrl mapping ("Kinto-style" macOS-feel on Linux):
+;; - physical Cmd  (Keychron K3 Mac mode sends LSUPER/RSUPER) → LCTRL/RCTRL
+;;   so Cmd+A/C/V/Z/T/W/Q/S/F all hit Linux apps' Ctrl+letter shortcuts.
+;; - physical Opt  (sends LALT) stays as LALT — Hyprland's $mainMod=ALT
+;;   binds (launcher, workspaces, etc.) fire via Opt-key.
+;; - Caps tap=Esc, hold=LCtrl (unchanged).
 ;;
-;; So: keep only the Caps tap-hold remap. Leave the modifier cluster alone.
+;; Trade-off: Cmd+Space (Spotlight muscle memory) no longer launches wofi —
+;; use Opt+Space. The Cmd+letter ergonomics in apps were prioritized over
+;; one-handed Cmd-WM access.
 
 (defsrc
-  caps
+  caps  lmet  rmet
 )
 
 (defalias
@@ -33,5 +35,5 @@
 )
 
 (deflayer base
-  @cesc
+  @cesc  lctl  rctl
 )
