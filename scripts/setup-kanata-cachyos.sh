@@ -8,7 +8,11 @@
 #   2. Creates 'uinput' group; adds $USER to it
 #   3. Drops udev rule so /dev/uinput is group-writable by 'uinput'
 #   4. Writes /etc/systemd/system/kanata.service
-#   5. Enables and starts the service
+#   5. Drops udev rule to restart kanata when Keychron K3 hotplugs in
+#      (KVM toggle disconnect/reconnect — kanata 1.11's internal watch
+#      detects the new device but doesn't re-grab it; an explicit restart
+#      via udev RUN+= is the reliable fix.)
+#   6. Enables and starts the service
 #
 # Requires: kanata binary on PATH, ~/.config/kanata/keychron.kbd present.
 
@@ -40,6 +44,17 @@ KERNEL=="uinput", GROUP="uinput", MODE="0660", TAG+="uaccess"
 RULE
 sudo udevadm control --reload
 sudo udevadm trigger --subsystem-match=misc
+
+log "Writing /etc/udev/rules.d/98-kanata-keychron-restart.rules..."
+# Match Keychron K3 by USB IDs (Apple VID 05ac since Keychron clones it for
+# macOS compatibility, K3 PID 024f). Restart kanata via systemd-run so udev
+# doesn't block waiting for the restart to finish.
+sudo tee /etc/udev/rules.d/98-kanata-keychron-restart.rules >/dev/null <<'RULE'
+ACTION=="add", SUBSYSTEM=="input", ENV{ID_INPUT_KEYBOARD}=="1", \
+  ATTRS{idVendor}=="05ac", ATTRS{idProduct}=="024f", \
+  RUN+="/usr/bin/systemd-run --no-block /bin/sh -c 'sleep 1 && /usr/bin/systemctl restart kanata.service'"
+RULE
+sudo udevadm control --reload
 
 log "Writing /etc/systemd/system/kanata.service..."
 sudo tee /etc/systemd/system/kanata.service >/dev/null <<UNIT
@@ -73,8 +88,8 @@ log ""
 log "Done. If kanata is not active:"
 log "  1. journalctl -u kanata.service --no-pager -n 30"
 log "  2. Likely cause: Keychron not currently attached (KVM on other machine)."
-log "  3. Once Keychron is attached, kanata auto-discovers via --watch-devices."
+log "  3. Once Keychron is attached, the udev rule auto-restarts kanata."
 log ""
 log "If active but Caps doesn't map to Esc:"
-log "  - Confirm Keychron device name in /proc/bus/input/devices matches 'Keychron' regex."
-log "  - Adjust linux-dev-names-include in ~/.config/kanata/keychron.kbd accordingly."
+log "  - Confirm Keychron device name in /proc/bus/input/devices matches 'Keychron'."
+log "  - If USB IDs differ, edit /etc/udev/rules.d/98-kanata-keychron-restart.rules."
