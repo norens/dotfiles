@@ -1,5 +1,11 @@
 [tools]
-node = "24.12.0"
+node   = "24"
+pnpm   = "latest"
+python = "3.12"
+go     = "latest"
+rust   = "stable"
+bun    = "latest"
+deno   = "latest"
 
 [settings]
 # Read legacy version files like .nvmrc so existing projects work without
