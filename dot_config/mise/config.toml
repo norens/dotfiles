@@ -1,6 +1,6 @@
 [tools]
 node   = "24"
-pnpm   = "latest"
+"npm:pnpm" = "latest"   # aqua:pnpm/pnpm@latest fails on linux-x64 asset naming; npm-based works
 python = "3.12"
 go     = "latest"
 rust   = "stable"
