@@ -16,7 +16,7 @@ Phase 4 — Dev environment         █████████░  80% (CLI sta
 Phase 5 — ML Foundation Slice     ██████████ 100% (Plan 1: Podman+CDI+Ollama; PyTorch nightly cu128 verified sm_120)
 Phase 5b — Isaac Lab/Sim/GR00T    ░░░░░░░░░░   0% (Plan 3, TBD)
 Phase 5c — Networking polish       ░░░░░░░░░░   0% (Plan 4, TBD)
-Phase 6 — Apps + локалізація     ░░░░░░░░░░   0%
+Phase 6 — Apps + локалізація     ███░░░░░░░  30% (UA layout + fonts done via Plan 3; apps/ESP32 pending)
 Phase 7 — Backup + snapshots      ░░░░░░░░░░   0%
 Phase 8 — Polish                  ░░░░░░░░░░   0%
 ```
