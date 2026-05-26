@@ -9,8 +9,9 @@ Phase 0 — Pre-install Windows     ██████████ 100% (вже 
 Phase 1 — CachyOS install         ██████████ 100% (system bootstraps, user logged in)
 Bootstrap (this workspace)        █████████░  95% (Tailscale + SSH + 1P keys ✅; cross-OS chezmoi migration ✅ 2026-05-25; claude-code on CachyOS — deferred)
 Phase 1.5 — ML storage subvols    ██████████ 100% (Plan 1, 2026-05-25)
-Phase 2 — NVIDIA + CUDA           █████████░  90% (driver 595.71.05 + nvidia-container-toolkit + CDI; kanata/Hyprland pending)
-Phase 3 — Keyboard parity         ░░░░░░░░░░   0%
+Phase 2 — NVIDIA + CUDA           ██████████ 100% (driver 595.71.05 + nvidia-container-toolkit + CDI)
+Phase 3 — Keyboard parity         ██████████ 100% (kanata Cmd→Ctrl Kinto-style + Caps tap-hold; KVM-safe via udev hotplug rule)
+Phase 3b — Desktop polish         ██████████ 100% (Waybar+swaync+hypridle+awww+hyprshot+satty all Gruvbox)
 Phase 4 — Dev environment         ░░░░░░░░░░   0%
 Phase 5 — ML Foundation Slice     █████████░  90% (Plan 1: Podman+CDI+Ollama running on Tailscale; models pulling)
 Phase 5b — Isaac Lab/Sim/GR00T    ░░░░░░░░░░   0% (Plan 3, TBD)
@@ -69,3 +70,11 @@ Phase 8 — Polish                  ░░░░░░░░░░   0%
 - **Архітектурні рішення зафіксовані в журналі (не в spec, бо це implementation details):**
   - Cross-OS chezmoi templating DONE (Plan 2). Раніше відкладалось — закрито 2026-05-25.
   - Rootless podman storage переїхав на `@ml-data/containers-rootless` (не на `@containers`). `@containers` залишений у fstab для майбутнього (якщо колись system-podman потрібен).
+- **2026-05-26** — **Plan 3 Desktop UX COMPLETE** (`docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md`, `plans/2026-05-25-desktop-ux-implementation.md`). Driven from MacBook via Tailscale SSH + chezmoi git push/pull.
+  - **kanata 1.11** system service via `scripts/setup-kanata-cachyos.sh` (uinput module + group + udev rules + systemd unit). Config `~/.config/kanata/keychron.kbd` matches by auto-discovery (kanata 1.11 ignored `linux-dev-names-include`-filtered devices, fallback works). `--watch-devices` doesn't exist in 1.11, replaced by `linux-continue-if-no-devs-found yes` + **udev rule** (`98-kanata-keychron-restart.rules`) that restarts the service on Keychron K3 USB hotplug (matches by Apple VID 05ac / PID 024f). Without that rule kanata stays "active" after KVM toggle but doesn't re-grab.
+  - **Final keymap (Kinto-style macOS-feel)**: physical Cmd → LCTRL/RCTRL so Cmd+A/Z/T/W/Q/C/V/S/F/L hit Linux apps' Ctrl shortcuts natively. Caps tap=Esc, hold=LCtrl. Physical Opt stays LALT. Original spec's lAlt↔lMet swap dropped: Keychron K3 in **Mac mode** already ships macOS-order keycodes hardware-side, so swapping again reversed it.
+  - **Hyprland** $mainMod = ALT (Opt-key drives launcher/workspaces/cycler/killactive). Screenshots on explicit `CTRL SHIFT, 3/4/5` so physical Cmd+Shift+N still triggers hyprshot. Parallel `CTRL, Space` (Cmd+Space → wofi) and `CTRL, Q` (Cmd+Q → killactive) for Spotlight + quit muscle memory. Move-to-workspace on Opt+Shift+N. `$mainMod+V` togglefloating freed → Cmd+Shift+V (so Cmd+V is paste).
+  - **Ghostty** keybinds add `performable:ctrl+c=copy_to_clipboard` + `ctrl+v=paste_from_clipboard` (kept legacy `cmd+c`/`cmd+v` for macOS-native).
+  - **Wallpaper**: `awww-daemon` (NOT swww — CachyOS/Arch repos renamed swww → awww as `An Answer to your Wayland Wallpaper Woes`, codeberg.org/LGFae/awww, drop-in CLI compat). `wallpaper-init.sh` set to executable via chezmoi `executable_` prefix. `gruvbox/cabin.png` default.
+  - **Waybar / swaync / hypridle** all Gruvbox Dark Hard, running via Hyprland `exec-once`. Ukrainian layout toggle via Right Ctrl (`grp:rctrl_toggle`).
+  - **Trade-offs accepted**: Ctrl+Space in apps blocked (VSCode IntelliSense force-suggest unreachable — use Opt+Space alternate). Alt+F/E/B browser menu access blocked by Hyprland binds. Cmd+R font-size / Cmd+E reset / Cmd+Enter fullscreen in Ghostty don't fire on Linux (would need OS-conditional template — deferred).
