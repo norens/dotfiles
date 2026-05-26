@@ -17,7 +17,7 @@ Phase 5 — ML Foundation Slice     ██████████ 100% (Plan 1:
 Phase 5b — Isaac Lab/Sim/GR00T    ░░░░░░░░░░   0% (Plan 3, TBD)
 Phase 5c — Networking polish       ░░░░░░░░░░   0% (Plan 4, TBD)
 Phase 6 — Apps + локалізація     ███░░░░░░░  30% (UA layout + fonts done via Plan 3; apps/ESP32 pending)
-Phase 7 — Backup + snapshots      ░░░░░░░░░░   0%
+Phase 7 — Backup + snapshots      ██████░░░░  60% (Snapper timeline+pacman hooks active; off-site backup pending)
 Phase 8 — Polish                  ░░░░░░░░░░   0%
 ```
 
@@ -70,6 +70,7 @@ Phase 8 — Polish                  ░░░░░░░░░░   0%
 - **Архітектурні рішення зафіксовані в журналі (не в spec, бо це implementation details):**
   - Cross-OS chezmoi templating DONE (Plan 2). Раніше відкладалось — закрито 2026-05-25.
   - Rootless podman storage переїхав на `@ml-data/containers-rootless` (не на `@containers`). `@containers` залишений у fstab для майбутнього (якщо колись system-podman потрібен).
+- **2026-05-26** — **Phase 7.1 Snapper.** CachyOS ships fully configured: snapper 0.13.1 + snap-pac (pre/post pacman hooks) + limine-snapper-sync (boot entries per snapshot) + btrfs-assistant GUI + cachyos-snapper-support. Only changes this session: enabled `snapper-timeline.timer` + `snapper-cleanup.timer` (default was disabled — added 5 hourly + 7 daily timeline snapshots in addition to pacman pre/post). Also uninstalled `visual-studio-code-insiders-bin` that paru sneaked in despite user's interrupt — caught via snapshot 47-48 review. Rollback procedure: `sudo snapper -c root rollback N` → reboot, or pick snapshot from limine boot menu.
 - **2026-05-26** — **Phase 4.1 / 4.2 / 4.3 done; 4.4 reduced to nvim+claude (user skipped vscode/cursor/zed).** CLI stack mostly pre-installed by CachyOS — only `yazi` + `github-cli` had to be added (pacman). zsh hooks (`starship`, `zoxide`, `direnv`, `atuin`, `mise`, `fzf`) already wired via `~/.zsh/{shared,linux}.zsh` from Plan 2. Chezmoi bootstrap: implicit (already running cross-OS). mise toolchain materialized: `bun 1.3.14`, `deno 2.8.0`, `go 1.26.3`, `node 24.16.0`, `npm:pnpm 11.3.0`, `python 3.12.13`, `rust 1.95.0 stable`. Fix: switched pnpm from `aqua:pnpm` to `npm:pnpm` backend (aqua asset naming mismatch on linux-x64). atuin history import from MacBook deferred — needs manual file copy.
 - **2026-05-26** — **Phase 5.3 PyTorch CUDA verification PASS.** Driver 595.71.05 + uv venv (Python 3.12.13) at `~/ml-data/pytorch-test/.venv`. `torch==2.12.0.dev20260407+cu128`, `torchvision==0.27.0.dev`, `triton==3.7.0+git9c288bc5`. Smoke test: `cuda.is_available()=True`, device "NVIDIA GeForce RTX 5070 Ti" sm_120 (Blackwell), CUDA build 12.8, cudnn 9.20. Matmul 4096³ fp32 = 4.07ms (33.8 TFLOPS, ~77% of theoretical 44 TFLOPS peak). 5-step MLP forward+backward converges, gradients flow. `uv` installed via `pacman -S uv` (0.11.16). Initial `uv pip install` hit network timeout on `nvidia-nvjitlink-cu12` — retry with `UV_HTTP_TIMEOUT=300` succeeded.
 - **2026-05-26** — **Plan 3 Desktop UX COMPLETE** (`docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md`, `plans/2026-05-25-desktop-ux-implementation.md`). Driven from MacBook via Tailscale SSH + chezmoi git push/pull.
