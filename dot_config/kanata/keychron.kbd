@@ -15,8 +15,17 @@
   linux-continue-if-no-devs-found yes
 )
 
+;; NOTE: original spec swapped lAlt↔lMet so macOS users on PC keyboards would
+;; get a macOS-order Cmd/Opt cluster. Keychron K3 in **Mac mode** already
+;; ships keycodes in macOS order at the hardware level — the physical "Cmd"
+;; key already emits LSUPER, "Opt" emits LALT. Applying the swap on top of
+;; that REVERSES it: physical Cmd would emit Alt and break $mainMod=SUPER
+;; binds in Hyprland (Cmd+Space launcher, Cmd+Shift+3 screenshot, etc).
+;;
+;; So: keep only the Caps tap-hold remap. Leave the modifier cluster alone.
+
 (defsrc
-  caps  lalt  lmet  ralt
+  caps
 )
 
 (defalias
@@ -24,6 +33,5 @@
 )
 
 (deflayer base
-  ;; Caps     left-Alt   left-Super   right-Alt
-  @cesc       lmet       lalt         ralt
+  @cesc
 )
