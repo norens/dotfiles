@@ -13,7 +13,7 @@ Phase 2 — NVIDIA + CUDA           ██████████ 100% (driver 
 Phase 3 — Keyboard parity         ██████████ 100% (kanata Cmd→Ctrl Kinto-style + Caps tap-hold; KVM-safe via udev hotplug rule)
 Phase 3b — Desktop polish         ██████████ 100% (Waybar+swaync+hypridle+awww+hyprshot+satty all Gruvbox)
 Phase 4 — Dev environment         ░░░░░░░░░░   0%
-Phase 5 — ML Foundation Slice     █████████░  90% (Plan 1: Podman+CDI+Ollama running on Tailscale; models pulling)
+Phase 5 — ML Foundation Slice     ██████████ 100% (Plan 1: Podman+CDI+Ollama; PyTorch nightly cu128 verified sm_120)
 Phase 5b — Isaac Lab/Sim/GR00T    ░░░░░░░░░░   0% (Plan 3, TBD)
 Phase 5c — Networking polish       ░░░░░░░░░░   0% (Plan 4, TBD)
 Phase 6 — Apps + локалізація     ░░░░░░░░░░   0%
@@ -70,6 +70,7 @@ Phase 8 — Polish                  ░░░░░░░░░░   0%
 - **Архітектурні рішення зафіксовані в журналі (не в spec, бо це implementation details):**
   - Cross-OS chezmoi templating DONE (Plan 2). Раніше відкладалось — закрито 2026-05-25.
   - Rootless podman storage переїхав на `@ml-data/containers-rootless` (не на `@containers`). `@containers` залишений у fstab для майбутнього (якщо колись system-podman потрібен).
+- **2026-05-26** — **Phase 5.3 PyTorch CUDA verification PASS.** Driver 595.71.05 + uv venv (Python 3.12.13) at `~/ml-data/pytorch-test/.venv`. `torch==2.12.0.dev20260407+cu128`, `torchvision==0.27.0.dev`, `triton==3.7.0+git9c288bc5`. Smoke test: `cuda.is_available()=True`, device "NVIDIA GeForce RTX 5070 Ti" sm_120 (Blackwell), CUDA build 12.8, cudnn 9.20. Matmul 4096³ fp32 = 4.07ms (33.8 TFLOPS, ~77% of theoretical 44 TFLOPS peak). 5-step MLP forward+backward converges, gradients flow. `uv` installed via `pacman -S uv` (0.11.16). Initial `uv pip install` hit network timeout on `nvidia-nvjitlink-cu12` — retry with `UV_HTTP_TIMEOUT=300` succeeded.
 - **2026-05-26** — **Plan 3 Desktop UX COMPLETE** (`docs/cachyos-setup/specs/2026-05-25-desktop-ux-design.md`, `plans/2026-05-25-desktop-ux-implementation.md`). Driven from MacBook via Tailscale SSH + chezmoi git push/pull.
   - **kanata 1.11** system service via `scripts/setup-kanata-cachyos.sh` (uinput module + group + udev rules + systemd unit). Config `~/.config/kanata/keychron.kbd` matches by auto-discovery (kanata 1.11 ignored `linux-dev-names-include`-filtered devices, fallback works). `--watch-devices` doesn't exist in 1.11, replaced by `linux-continue-if-no-devs-found yes` + **udev rule** (`98-kanata-keychron-restart.rules`) that restarts the service on Keychron K3 USB hotplug (matches by Apple VID 05ac / PID 024f). Without that rule kanata stays "active" after KVM toggle but doesn't re-grab.
   - **Final keymap (Kinto-style macOS-feel)**: physical Cmd → LCTRL/RCTRL so Cmd+A/Z/T/W/Q/C/V/S/F/L hit Linux apps' Ctrl shortcuts natively. Caps tap=Esc, hold=LCtrl. Physical Opt stays LALT. Original spec's lAlt↔lMet swap dropped: Keychron K3 in **Mac mode** already ships macOS-order keycodes hardware-side, so swapping again reversed it.
