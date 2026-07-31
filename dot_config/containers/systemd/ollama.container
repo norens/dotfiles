@@ -1,7 +1,15 @@
 # Ollama always-on LLM container (Tailscale-only)
 # Created 2026-05-25 for ML Foundation Slice Plan 1 Task 6+7
 # Spec: docs/cachyos-setup/specs/2026-05-24-ml-robotics-stack-design.md §5
-# Not chezmoi-managed yet (cross-OS templating is a deferred sub-project).
+#
+# This IS chezmoi-managed, on the box only — the Mac has no podman and never
+# applies it. Edit here, commit, then `chezmoi update` on the box; a systemd
+# quadlet does not take effect until `systemctl --user daemon-reload` plus a
+# restart of ollama.service, which chezmoi will not do for you.
+#
+# Do not scp this file across. It looks like it works and then the next
+# `chezmoi apply` on the box silently reverts it — which is exactly how the
+# 4096-context truncation survived unnoticed until 2026-07-31.
 
 [Unit]
 Description=Ollama LLM service (always-on, Tailscale-only)
